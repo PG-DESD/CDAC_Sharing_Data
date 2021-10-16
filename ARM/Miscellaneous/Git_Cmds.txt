@@ -1,3 +1,9 @@
 git checkout master
 git pull
 git status
+git add
+git commit -m "your comments"
+git push
+
+now two in one command
+git commit -a -m 'Add new benchmarks'
