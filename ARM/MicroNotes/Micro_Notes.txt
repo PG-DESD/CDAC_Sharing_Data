@@ -1,4 +1,4 @@
-PC
+PC[Program Counter]
 SP Higher Address---> Lower Address---
 
 0xFFFF
