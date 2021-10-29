@@ -43,8 +43,11 @@ uint8_t
 UART - 8N1, 9600/115200, Async, Rx/Tx, Start bit & Stop Bits,Serial Communication [8 : 8 data bits, N: No parity, 1: Stop Bit]
 SPI- Baud Rate for SPI Dependa on Clock and the Prescalar [Clock=16Mhz, PreScalar=16, Baud= 1000Kbps]1000kbps,Sync, MOSI/MISO/CS/CLK,Master Slave, No Slaves= No of CS Pins,no of wires req= n+3 [n= no of slaves]
 I2C- SDA/SCL,Standard Mode=100Kbps/Fast Mode=400kbps/HighSpeed=3.4Mbps,Master-Slave Comm., Sync,Slave Address can be 10bits / 7bit Address, Pull Up Registers are there, SDA is Bidirectional/SCL Master-> Slave.
-CAN- 
-
+CAN- Used in Automotive, Most Robust & Reliable Bus, Phy Layer and Logical Layer Prtotection , CAN H/CAN L, Low Speed : upto125Kbps, High Speed : upto 1Mbps, Aysnc, BroadcasT  Communinication/Receiver Selective Addresing
+[Phy: Terminating Resistance 120 Ohm, Differential Signalling, Twisted Pairs of wires  ]
+[Logical : CRC Check, ACK Check, Bit Monitoring, Stuff Bit Check, Frame Check]
+Every Node in CAN BUS is a Master
+Principal: CarrierSenseMultipleAccess/Collision Avoidance[CSMA/CA]
 
 0xFFFF
 fffe
