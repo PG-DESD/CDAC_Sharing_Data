@@ -54,10 +54,18 @@ fffe
 
 0x0000
 Inst.
-ISA
+ISA [x86(32bit Intel), x64(64bit Arch AMD), ARM]
+OTA: Over the Air Updates
+1. Incremental Updates
+2. Full Updates
+3. Bootloader Updates
+
 Flow of PC in case of Jump, Function Call
+When writing prog. for MCU we use/declare Local/Global, these variables are saved in SRAM(Stack), as their values are changing in the prog, so they are saved in SRAN not in Flash.
+if using RTOS heap memory is used from RAM
+Since we use Harvard Architecture saperate buses for Flash and RAM
 Use of Stack Pointer
-Von-numen Architecture- Haward Architecture
+Von-numen Architecture- Harvard Architecture
 RISC-CISC
 FPGA/ASIC
 
