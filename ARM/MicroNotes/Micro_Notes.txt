@@ -14,13 +14,16 @@ label: rjmp label
 
 ps aux | grep -i nameofprogram'
 
-//1811//Code below to Turn On Blue LED
-const volatile uint32_t *pClkCtrlReg =   (uint32_t*)0x40023830;//address incorrect
-const volatile uint32_t *pPortDModeReg = (uint32_t*)0x40020C00;//address incorrect
-const volatile uint32_t *pPortDOutReg =  (uint32_t*)0x40020C14;//address incorrect
+//1811//Code below to Turn On Blue LED [PE8]
 
-//1. enable the clock for GPOID peripheral in the AHB1ENR (SET the 3rd bit position) //bit position incorrect for LED
-*pClkCtrlReg |= ( 1 << 3);
+// To get the address of a Register first get base address from memory map then get the offset from peripheral register
+//Register address= [Base Address] + [Offset]
+const volatile uint32_t *pClkCtrlReg =   (uint32_t*)0x40021014;//[0x40021000] + [0x14]
+const volatile uint32_t *pPortEModeReg = (uint32_t*)0x40020C00;//[base address of GPIOE] + [offset for mode register]?
+const volatile uint32_t *pPortDOutReg =  (uint32_t*)0x40020C14;//[base address of GPIOE] + [offset for ODR register]?
+
+//1. enable the clock for GPOIE peripheral in the AHB1ENR (SET the 21st bit position) //bit position incorrect for LED
+*pClkCtrlReg |= ( 1 << 21);
 
 //2. configure the mode of the IO pin as output  // Incorrect IO Pins
 //a. clear the 24th and 25th bit positions (CLEAR) 
