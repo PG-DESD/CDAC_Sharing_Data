@@ -14,7 +14,7 @@ label: rjmp label
 
 ps aux | grep -i nameofprogram'
 
-
+//1811//Code below to Turn On Blue LED
 const volatile uint32_t *pClkCtrlReg =   (uint32_t*)0x40023830;//address incorrect
 const volatile uint32_t *pPortDModeReg = (uint32_t*)0x40020C00;//address incorrect
 const volatile uint32_t *pPortDOutReg =  (uint32_t*)0x40020C14;//address incorrect
