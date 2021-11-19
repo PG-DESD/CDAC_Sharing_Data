@@ -19,20 +19,20 @@ ps aux | grep -i nameofprogram'
 // To get the address of a Register first get base address from memory map then get the offset from peripheral register
 //Register address= [Base Address] + [Offset]
 const volatile uint32_t *pClkCtrlReg =   (uint32_t*)0x40021014;//[0x40021000] + [0x14]
-const volatile uint32_t *pPortEModeReg = (uint32_t*)0x40020C00;//[base address of GPIOE] + [offset for mode register]?
-const volatile uint32_t *pPortDOutReg =  (uint32_t*)0x40020C14;//[base address of GPIOE] + [offset for ODR register]?
+const volatile uint32_t *pPortEModeReg = (uint32_t*)0x48001000;//[0x48001000] + [0x00 offset for mode register]?
+const volatile uint32_t *pPortEOutReg =  (uint32_t*)0x48001014;//[0x48001000] + [0x14 offset for ODR register]?
 
 //1. enable the clock for GPOIE peripheral in the AHB1ENR (SET the 21st bit position) //bit position incorrect for LED
 *pClkCtrlReg |= ( 1 << 21);
 
-//2. configure the mode of the IO pin as output  // Incorrect IO Pins
-//a. clear the 24th and 25th bit positions (CLEAR) 
-*pPortDModeReg &= ~( 3 << 24);
-//b. make 24th bit position as 1 (SET)
-*pPortDModeReg |= ( 1 << 24);
+//2. configure the mode of the IO 8 pin as output  
+//a. clear the 16th and 17th bit positions (CLEAR) 
+*pPortEModeReg &= ~( 3 << 16);
+//b. make 16th bit position as 1 (SET)
+*pPortEModeReg |= ( 1 << 16);
 
-//3.SET 12th bit of the output data register to make I/O pin-12 as HIGH  // Incorrect IO Pin Out value
-*pPortDOutReg |= ( 1 << 12);
+//3.SET 8th bit of the output data register to make I/O pin-8 as HIGH  // Incorrect IO Pin Out value
+*pPortEOutReg |= ( 1 << 8);
 
 
 Bitwise: &, | , ~, >>,<<
