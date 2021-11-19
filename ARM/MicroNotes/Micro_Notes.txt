@@ -34,6 +34,7 @@ const volatile uint32_t *pPortEOutReg =  (uint32_t*)0x48001014;//[0x48001000] + 
 //3.SET 8th bit of the output data register to make I/O pin-8 as HIGH  // Incorrect IO Pin Out value
 *pPortEOutReg |= ( 1 << 8);
 
+while(1);
 
 Bitwise: &, | , ~, >>,<<
 Volatile

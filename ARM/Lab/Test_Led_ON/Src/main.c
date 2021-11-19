@@ -24,7 +24,7 @@ int main(void)
 	//b. make 16th bit position as 1 (SET)
 	*pPortEModeReg |= ( 1 << 16);
 
-	//3.SET 8th bit of the output data register to make I/O pin-12 as HIGH
+	//3.SET 8th bit of the output data register to make I/O pin-8 as HIGH
 	*pPortEOutReg |= ( 1 << 8);
 
     while(1);
