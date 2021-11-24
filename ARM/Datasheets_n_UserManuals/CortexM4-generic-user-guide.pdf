@@ -12901,3 +12901,260 @@ trailer
 startxref
 116
 %%EOF
+1577 0 obj<</Annots[1578 0 R 1579 0 R 1580 0 R 1581 0 R 1582 0 R 1583 0 R 1584 0 R 4556 0 R 4557 0 R 4558 0 R 4559 0 R 4560 0 R 4561 0 R 4562 0 R 4563 0 R]/B[4092 0 R]/Contents 1586 0 R/CropBox[0 0 595 792]/MediaBox[0 0 595 792]/Parent 4008 0 R/Resources 1585 0 R/Rotate 0/Thumb 2406 0 R/Type/Page>>endobj1587 0 obj<</Annots[1588 0 R 1589 0 R 1590 0 R 1591 0 R 1592 0 R 1593 0 R 1594 0 R 1595 0 R 4576 0 R 4577 0 R 4578 0 R 4579 0 R]/B[4091 0 R]/Contents 1597 0 R/CropBox[0 0 595 792]/MediaBox[0 0 595 792]/Parent 4008 0 R/Resources 1596 0 R/Rotate 0/Thumb 2407 0 R/Type/Page>>endobj1637 0 obj<</Annots[1638 0 R 1639 0 R 1640 0 R 1641 0 R 1642 0 R 4586 0 R 4587 0 R 4588 0 R 4589 0 R]/B[4087 0 R]/Contents 1644 0 R/CropBox[0 0 595 792]/MediaBox[0 0 595 792]/Parent 4009 0 R/Resources 1643 0 R/Rotate 0/Thumb 2411 0 R/Type/Page>>endobj4015 0 obj<</Length 4362/Subtype/XML/Type/Metadata>>stream
+<?xpacket begin="Ôªø" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 7.0-c000 79.1357c9e, 2021/07/14-00:39:56        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/"
+            xmlns:pdfx="http://ns.adobe.com/pdfx/1.3/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/">
+         <xmp:CreateDate>2016-01-26T13:37:55Z</xmp:CreateDate>
+         <xmp:CreatorTool>FrameMaker 8.0</xmp:CreatorTool>
+         <xmp:ModifyDate>2021-11-24T12:25:04+05:30</xmp:ModifyDate>
+         <xmp:MetadataDate>2021-11-24T12:25:04+05:30</xmp:MetadataDate>
+         <dc:format>application/pdf</dc:format>
+         <dc:description>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">ARM Cortex-M4 Devices Generic User Guide (PDF). This documentation provides generic technical information for devices that use the Cortex-M4 processor. It describes the processor, its instruction set and memory model, and core peripherals and system interface.</rdf:li>
+            </rdf:Alt>
+         </dc:description>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">Cortex-M4 Devices Generic User Guide</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <dc:creator>
+            <rdf:Seq>
+               <rdf:li>ARM Limited</rdf:li>
+            </rdf:Seq>
+         </dc:creator>
+         <pdf:Producer>Acrobat Distiller 11.0 (Windows)</pdf:Producer>
+         <pdf:Keywords>Processors, Microcontroller, Cortex-M, Cortex-M4, Software Developers, Embedded Software Developers, Architecture, Architecture, 32-bit, Microarchitecture, Debug and Trace, ETM,  ARM Processor Licensee</pdf:Keywords>
+         <pdf:Copyright>Copyright ??2010-2011 ARM. All rights reserved.</pdf:Copyright>
+         <pdfx:Copyright>Copyright ??2010-2011 ARM. All rights reserved.</pdfx:Copyright>
+         <xmpMM:DocumentID>uuid:e9893bb4-9622-49fe-b2bc-2c209cd59b2d</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:4e84335c-0a96-4e23-ac49-05f9b2d3305e</xmpMM:InstanceID>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+endstreamendobj4026 0 obj<</Author(ARM Limited)/Copyright(Copyright ??2010-2011 ARM. All rights reserved.)/CreationDate(D:20160126133755Z)/Creator(FrameMaker 8.0)/Keywords(Processors, Microcontroller, Cortex-M, Cortex-M4, Software Developers, Embedded Software Developers, Architecture, Architecture, 32-bit, Microarchitecture, Debug and Trace, ETM,  ARM Processor Licensee)/ModDate(D:20211124122504+05'30')/Producer(Acrobat Distiller 11.0 \(Windows\))/Subject(ARM Cortex-M4 Devices Generic User Guide \(PDF\). This documentation provides generic technical information for devices that use the Cortex-M4 processor. It describes the processor, its instruction set and memory model, and core peripherals and system int\erface.)/Title(Cortex-M4 Devices Generic User Guide)>>endobj4321 0 obj<</Count 33/First 4322 0 R/Last 4323 0 R>>endobj4327 0 obj<</Count 6/Dest(G7.1089328)/First 4328 0 R/Last 4329 0 R/Next 4325 0 R/Parent 4321 0 R/Prev 4330 0 R/Title(˛ˇ C o r t e x - M 4   P e r i p h e r a l s)>>endobj4330 0 obj<</Count 12/Dest(G6.1186663)/First 4331 0 R/Last 4332 0 R/Next 4327 0 R/Parent 4321 0 R/Prev 4333 0 R/Title(˛ˇ T h e   C o r t e x - M 4   I n s t r u c t i o n   S e t)>>endobj4333 0 obj<</Count 5/Dest(G5.1073181)/First 4334 0 R/Last 4335 0 R/Next 4330 0 R/Parent 4321 0 R/Prev 4336 0 R/Title(˛ˇ T h e   C o r t e x - M 4   P r o c e s s o r)>>endobj4556 0 obj<</AP<</N 4573 0 R>>/C[1.0 0.819611 0.0]/CA 0.399994/CreationDate(D:20211124122031+05'30')/F 4/M(D:20211124122031+05'30')/NM(57de10f4-6822-4d12-9a66-002ffa92b386)/P 1577 0 R/Popup 4557 0 R/QuadPoints[92.64 417.723 134.517 417.723 92.64 405.897 134.517 405.897]/Rect[89.4831 405.528 137.674 418.092]/Subj(Highlight)/Subtype/Highlight/T(z665059)/Type/Annot>>endobj4557 0 obj<</F 28/Open false/Parent 4556 0 R/Rect[595.0 303.723 799.0 417.723]/Subtype/Popup/Type/Annot>>endobj4558 0 obj<</AP<</N 4570 0 R>>/C[1.0 0.819611 0.0]/CA 0.399994/CreationDate(D:20211124122035+05'30')/F 4/M(D:20211124122035+05'30')/NM(31d63980-f987-4241-8485-9cf9563470c9)/P 1577 0 R/Popup 4559 0 R/QuadPoints[151.68 417.723 202.155 417.723 151.68 405.897 202.155 405.897]/Rect[148.523 405.528 205.312 418.092]/Subj(Highlight)/Subtype/Highlight/T(z665059)/Type/Annot>>endobj4559 0 obj<</F 28/Open false/Parent 4558 0 R/Rect[595.0 303.723 799.0 417.723]/Subtype/Popup/Type/Annot>>endobj4560 0 obj<</AP<</N 4567 0 R>>/C[1.0 0.819611 0.0]/CA 0.399994/CreationDate(D:20211124122043+05'30')/F 4/M(D:20211124122043+05'30')/NM(0f61af3a-d73f-486a-bb53-39d40b98e2a5)/P 1577 0 R/Popup 4561 0 R/QuadPoints[92.64 235.731 131.52 235.731 92.64 227.098 131.52 227.098]/Rect[90.3353 226.828 133.824 236.001]/Subj(Highlight)/Subtype/Highlight/T(z665059)/Type/Annot>>endobj4561 0 obj<</F 28/Open false/Parent 4560 0 R/Rect[595.0 121.731 799.0 235.731]/Subtype/Popup/Type/Annot>>endobj4562 0 obj<</AP<</N 4564 0 R>>/C[1.0 0.819611 0.0]/CA 0.399994/CreationDate(D:20211124122045+05'30')/F 4/M(D:20211124122045+05'30')/NM(192a420a-ed5c-4f3d-b7ed-852fa28dc914)/P 1577 0 R/Popup 4563 0 R/QuadPoints[151.68 237.723 171.187 237.723 151.68 225.897 171.187 225.897]/Rect[148.523 225.528 174.344 238.092]/Subj(Highlight)/Subtype/Highlight/T(z665059)/Type/Annot>>endobj4563 0 obj<</F 28/Open false/Parent 4562 0 R/Rect[595.0 123.723 799.0 237.723]/Subtype/Popup/Type/Annot>>endobj4564 0 obj<</BBox[0.0 0.0 25.8204 12.565]/FormType 1/Length 27/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ExtGState<</R0<</AIS false/CA 0.399994/Type/ExtGState/ca 0.399994>>/R1<</AIS false/BM/Multiply/Type/ExtGState>>>>/ProcSet[/PDF]/XObject<</MWFOForm 4565 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/R0 gs
+/R1 gs
+/MWFOForm Do
+
+endstreamendobj4565 0 obj<</BBox[0.0 0.0 25.8204 12.565]/FormType 1/Group<</S/Transparency>>/Length 9/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ProcSet[/PDF]/XObject<</Form 4566 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/Form Do
+
+endstreamendobj4566 0 obj<</BBox[148.523 225.528 174.344 238.092]/FormType 1/Length 175/Matrix[1.0 0.0 0.0 1.0 -148.523 -225.528]/Resources<</ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+1 0.819611 0 rg
+0.7391 w
+151.68 225.8971 m
+148.8926 228.6844 148.8926 234.9355 151.68 237.7229 c
+171.1866 237.7229 l
+173.9739 234.9355 173.9739 228.6844 171.1866 225.8971 c
+f
+
+endstreamendobj4567 0 obj<</BBox[0.0 0.0 43.4891 9.17288]/FormType 1/Length 27/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ExtGState<</R0<</AIS false/CA 0.399994/Type/ExtGState/ca 0.399994>>/R1<</AIS false/BM/Multiply/Type/ExtGState>>>>/ProcSet[/PDF]/XObject<</MWFOForm 4568 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/R0 gs
+/R1 gs
+/MWFOForm Do
+
+endstreamendobj4568 0 obj<</BBox[0.0 0.0 43.4891 9.17288]/FormType 1/Group<</S/Transparency>>/Length 9/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ProcSet[/PDF]/XObject<</Form 4569 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/Form Do
+
+endstreamendobj4569 0 obj<</BBox[90.3353 226.828 133.824 236.001]/FormType 1/Length 169/Matrix[1.0 0.0 0.0 1.0 -90.3353 -226.828]/Resources<</ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+1 0.819611 0 rg
+0.5396 w
+92.64 227.098 m
+90.6051 229.1329 90.6051 233.6964 92.64 235.7313 c
+131.5198 235.7313 l
+133.5547 233.6964 133.5547 229.1329 131.5198 227.098 c
+f
+
+endstreamendobj4570 0 obj<</BBox[0.0 0.0 56.7885 12.5649]/FormType 1/Length 27/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ExtGState<</R0<</AIS false/CA 0.399994/Type/ExtGState/ca 0.399994>>/R1<</AIS false/BM/Multiply/Type/ExtGState>>>>/ProcSet[/PDF]/XObject<</MWFOForm 4571 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/R0 gs
+/R1 gs
+/MWFOForm Do
+
+endstreamendobj4571 0 obj<</BBox[0.0 0.0 56.7885 12.5649]/FormType 1/Group<</S/Transparency>>/Length 9/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ProcSet[/PDF]/XObject<</Form 4572 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/Form Do
+
+endstreamendobj4572 0 obj<</BBox[148.523 405.528 205.312 418.092]/FormType 1/Length 173/Matrix[1.0 0.0 0.0 1.0 -148.523 -405.528]/Resources<</ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+1 0.819611 0 rg
+0.7391 w
+151.68 405.8971 m
+148.8926 408.6845 148.8926 414.9355 151.68 417.7229 c
+202.1546 417.7229 l
+204.942 414.9355 204.942 408.6845 202.1546 405.8971 c
+f
+
+endstreamendobj4573 0 obj<</BBox[0.0 0.0 48.1908 12.5649]/FormType 1/Length 27/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ExtGState<</R0<</AIS false/CA 0.399994/Type/ExtGState/ca 0.399994>>/R1<</AIS false/BM/Multiply/Type/ExtGState>>>>/ProcSet[/PDF]/XObject<</MWFOForm 4574 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/R0 gs
+/R1 gs
+/MWFOForm Do
+
+endstreamendobj4574 0 obj<</BBox[0.0 0.0 48.1908 12.5649]/FormType 1/Group<</S/Transparency>>/Length 9/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ProcSet[/PDF]/XObject<</Form 4575 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/Form Do
+
+endstreamendobj4575 0 obj<</BBox[89.4831 405.528 137.674 418.092]/FormType 1/Length 169/Matrix[1.0 0.0 0.0 1.0 -89.4831 -405.528]/Resources<</ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+1 0.819611 0 rg
+0.7391 w
+92.64 405.8971 m
+89.8526 408.6845 89.8526 414.9355 92.64 417.7229 c
+134.517 417.7229 l
+137.3043 414.9355 137.3043 408.6845 134.517 405.8971 c
+f
+
+endstreamendobj4576 0 obj<</AP<</N 4583 0 R>>/C[1.0 0.819611 0.0]/CA 0.399994/CreationDate(D:20211124122419+05'30')/F 4/M(D:20211124122419+05'30')/NM(fe1d4817-f946-4744-a57c-a01bea1fc7fc)/P 1587 0 R/Popup 4577 0 R/QuadPoints[107.699 418.44 250.367 418.44 107.699 404.556 250.367 404.556]/Rect[103.992 404.122 254.074 418.874]/Subj(Highlight)/Subtype/Highlight/T(z665059)/Type/Annot>>endobj4577 0 obj<</F 28/Open false/Parent 4576 0 R/Rect[595.0 304.44 799.0 418.44]/Subtype/Popup/Type/Annot>>endobj4578 0 obj<</AP<</N 4580 0 R>>/C[1.0 0.819611 0.0]/CA 0.399994/CreationDate(D:20211124122427+05'30')/F 4/M(D:20211124122427+05'30')/NM(9a74d8a6-7e91-4010-9699-aa60d05a0de0)/P 1587 0 R/Popup 4579 0 R/QuadPoints[463.8 211.263 534.521 211.263 463.8 199.437 534.521 199.437]/Rect[460.643 199.067 537.678 211.632]/Subj(Highlight)/Subtype/Highlight/T(z665059)/Type/Annot>>endobj4579 0 obj<</F 28/Open false/Parent 4578 0 R/Rect[595.0 97.2627 799.0 211.263]/Subtype/Popup/Type/Annot>>endobj4580 0 obj<</BBox[0.0 0.0 77.0348 12.565]/FormType 1/Length 27/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ExtGState<</R0<</AIS false/CA 0.399994/Type/ExtGState/ca 0.399994>>/R1<</AIS false/BM/Multiply/Type/ExtGState>>>>/ProcSet[/PDF]/XObject<</MWFOForm 4581 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/R0 gs
+/R1 gs
+/MWFOForm Do
+
+endstreamendobj4581 0 obj<</BBox[0.0 0.0 77.0348 12.565]/FormType 1/Group<</S/Transparency>>/Length 9/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ProcSet[/PDF]/XObject<</Form 4582 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/Form Do
+
+endstreamendobj4582 0 obj<</BBox[460.643 199.067 537.678 211.632]/FormType 1/Length 179/Matrix[1.0 0.0 0.0 1.0 -460.643 -199.067]/Resources<</ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+1 0.819611 0 rg
+0.7391 w
+463.8003 199.4369 m
+461.0129 202.2243 461.0129 208.4754 463.8003 211.2627 c
+534.5212 211.2627 l
+537.3086 208.4754 537.3086 202.2243 534.5212 199.4369 c
+f
+
+endstreamendobj4583 0 obj<</BBox[0.0 0.0 150.081 14.7519]/FormType 1/Length 27/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ExtGState<</R0<</AIS false/CA 0.399994/Type/ExtGState/ca 0.399994>>/R1<</AIS false/BM/Multiply/Type/ExtGState>>>>/ProcSet[/PDF]/XObject<</MWFOForm 4584 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/R0 gs
+/R1 gs
+/MWFOForm Do
+
+endstreamendobj4584 0 obj<</BBox[0.0 0.0 150.081 14.7519]/FormType 1/Group<</S/Transparency>>/Length 9/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ProcSet[/PDF]/XObject<</Form 4585 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/Form Do
+
+endstreamendobj4585 0 obj<</BBox[103.992 404.122 254.074 418.874]/FormType 1/Length 175/Matrix[1.0 0.0 0.0 1.0 -103.992 -404.122]/Resources<</ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+1 0.819611 0 rg
+0.8678 w
+107.6987 404.5559 m
+104.4262 407.8284 104.4262 415.1675 107.6987 418.44 c
+250.3672 418.44 l
+253.6397 415.1675 253.6397 407.8284 250.3672 404.5559 c
+f
+
+endstreamendobj4586 0 obj<</AP<</N 4593 0 R>>/C[1.0 0.819611 0.0]/CA 0.399994/CreationDate(D:20211124122456+05'30')/F 4/M(D:20211124122456+05'30')/NM(d16a6a6b-620a-40c4-91ae-283753fa9a11)/P 1637 0 R/Popup 4587 0 R/QuadPoints[107.73 621.121 273.732 621.121 107.73 607.237 273.732 607.237]/Rect[104.023 606.803 277.438 621.555]/Subj(Highlight)/Subtype/Highlight/T(z665059)/Type/Annot>>endobj4587 0 obj<</F 28/Open false/Parent 4586 0 R/Rect[595.0 507.121 799.0 621.121]/Subtype/Popup/Type/Annot>>endobj4588 0 obj<</AP<</N 4590 0 R>>/C[1.0 0.819611 0.0]/CA 0.399994/CreationDate(D:20211124122501+05'30')/F 4/M(D:20211124122501+05'30')/NM(311d2e13-30d4-4bd5-8934-429ac1126bc6)/P 1637 0 R/Popup 4589 0 R/QuadPoints[337.44 355.323 354.932 355.323 337.44 343.497 354.932 343.497 371.436 355.323 395.924 355.323 371.436 343.497 395.924 343.497]/Rect[334.283 343.128 399.081 355.692]/Subj(Highlight)/Subtype/Highlight/T(z665059)/Type/Annot>>endobj4589 0 obj<</F 28/Open false/Parent 4588 0 R/Rect[595.0 241.323 799.0 355.323]/Subtype/Popup/Type/Annot>>endobj4590 0 obj<</BBox[0.0 0.0 64.7981 12.565]/FormType 1/Length 27/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ExtGState<</R0<</AIS false/CA 0.399994/Type/ExtGState/ca 0.399994>>/R1<</AIS false/BM/Multiply/Type/ExtGState>>>>/ProcSet[/PDF]/XObject<</MWFOForm 4591 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/R0 gs
+/R1 gs
+/MWFOForm Do
+
+endstreamendobj4591 0 obj<</BBox[0.0 0.0 64.7981 12.565]/FormType 1/Group<</S/Transparency>>/Length 9/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ProcSet[/PDF]/XObject<</Form 4592 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/Form Do
+
+endstreamendobj4592 0 obj<</BBox[334.283 343.128 399.081 355.692]/Filter[/FlateDecode]/FormType 1/Length 142/Matrix[1.0 0.0 0.0 1.0 -334.283 -343.128]/Resources<</ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+HâTè11˚º¬/X≈±«Ô9	hh¯>È|¶ùh÷¶é≈1ô©”Îﬁ:\ÇÈ›D™]HT†·LœÕ”Fl61ñ]ƒLÏKNœ2ˆ”—ƒ!£∞«fÁb&…ıÙŒÜ£›ö8C≈‚Øl.L]V‹$πü^)Cåﬂ©´,÷Ó‡˙ß$πû^-˚0 ú›A<
+endstreamendobj4593 0 obj<</BBox[0.0 0.0 173.415 14.7519]/FormType 1/Length 27/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ExtGState<</R0<</AIS false/CA 0.399994/Type/ExtGState/ca 0.399994>>/R1<</AIS false/BM/Multiply/Type/ExtGState>>>>/ProcSet[/PDF]/XObject<</MWFOForm 4594 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/R0 gs
+/R1 gs
+/MWFOForm Do
+
+endstreamendobj4594 0 obj<</BBox[0.0 0.0 173.415 14.7519]/FormType 1/Group<</S/Transparency>>/Length 9/Matrix[1.0 0.0 0.0 1.0 0.0 0.0]/Resources<</ProcSet[/PDF]/XObject<</Form 4595 0 R>>>>/Subtype/Form/Type/XObject>>stream
+/Form Do
+
+endstreamendobj4595 0 obj<</BBox[104.023 606.803 277.438 621.555]/FormType 1/Length 177/Matrix[1.0 0.0 0.0 1.0 -104.023 -606.803]/Resources<</ProcSet[/PDF]>>/Subtype/Form/Type/XObject>>stream
+1 0.819611 0 rg
+0.8678 w
+107.7298 607.237 m
+104.4573 610.5095 104.4573 617.8486 107.7298 621.1211 c
+273.7317 621.1211 l
+277.0042 617.8486 277.0042 610.5095 273.7317 607.237 c
+f
+
+endstreamendobjxref
+0 1
+0000000000 65535 f
+1577 1
+0001783188 00000 n
+1587 1
+0001783496 00000 n
+1637 1
+0001783777 00000 n
+4015 1
+0001784031 00000 n
+4026 1
+0001788473 00000 n
+4321 1
+0001789239 00000 n
+4327 1
+0001789300 00000 n
+4330 1
+0001789473 00000 n
+4333 1
+0001789663 00000 n
+4556 40
+0001789840 00000 n
+0001790215 00000 n
+0001790329 00000 n
+0001790706 00000 n
+0001790820 00000 n
+0001791193 00000 n
+0001791307 00000 n
+0001791684 00000 n
+0001791798 00000 n
+0001792147 00000 n
+0001792384 00000 n
+0001792757 00000 n
+0001793107 00000 n
+0001793345 00000 n
+0001793712 00000 n
+0001794062 00000 n
+0001794300 00000 n
+0001794671 00000 n
+0001795021 00000 n
+0001795259 00000 n
+0001795626 00000 n
+0001796003 00000 n
+0001796115 00000 n
+0001796490 00000 n
+0001796604 00000 n
+0001796953 00000 n
+0001797190 00000 n
+0001797567 00000 n
+0001797917 00000 n
+0001798155 00000 n
+0001798528 00000 n
+0001798905 00000 n
+0001799019 00000 n
+0001799460 00000 n
+0001799574 00000 n
+0001799923 00000 n
+0001800160 00000 n
+0001800521 00000 n
+0001800871 00000 n
+0001801109 00000 n
+trailer
+<</Size 4596/Root 4028 0 R/Info 4026 0 R/ID[<310E17CABE6F9F2BD37F82D174D3CF49><F01C7DA473FA9943AD22B13B9C44856C>]/Prev 116>>
+startxref
+1801484
+%%EOF
