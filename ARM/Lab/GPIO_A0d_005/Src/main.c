@@ -15,20 +15,21 @@ int main(void)
 	uint32_t *pPortEModeReg = (uint32_t*)0x48001000;//0x48001000 [BASE] + 0x00 [OFFSET]
 	uint32_t *pPortEOutReg =  (uint32_t*)0x48001014;//0x48001000 [BASE] + 0x14 [OFFSET]
 
-	uint32_t volatile *const pPortAModeReg = (uint32_t*)0x123;
-	uint32_t volatile *const pPortAInReg =   (uint32_t*)0x123;
+	uint32_t volatile *const pPortAModeReg = (uint32_t*)0x48000000;//0x48000000 [BASE] + 0x00 [OFFSET]
+	uint32_t volatile *const pPortAInReg =   (uint32_t*)0x48000010;//0x48000000 [BASE] + 0x10 [OFFSET]
 
 	//1. a. enable the clock for GPOIE peripheral in the AHBENR (SET the 21st bit position)
 	*pClkCtrlReg |= ( 1 << 21);
-	//1. b. enable the clock for GPIOA peripherals in the AHBENR (SET the xx bit position)
-
+	//1. b. enable the clock for GPIOA peripherals in the AHBENR (SET the 17th bit position)
+	*pClkCtrlReg |= ( 1 << 17);
+	
 	//2. configure the mode of the IO pin 9 as output PE9
 	//a. clear the 16th and 17th bit positions (CLEAR)
 	*pPortEModeReg &= ~( 3 << 18);
 	//b. make 16th bit position as 1 (SET)
 	*pPortEModeReg |= ( 1 << 18);
 	//c. Configure PA0 as input mode (GPIOA MODE REGISTER)
-	*pPortAModeReg &= ~(3 << 0);// correct it
+	*pPortAModeReg &= ~(3 << 0);// Please correct it Warning : IT CAN BE WRONG
 
 	//3.SET 9th bit of the output data register to make I/O pin-9 as HIGH
 	//*pPortEOutReg |= ( 1 << 9);
