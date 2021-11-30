@@ -24,7 +24,7 @@ int main(void)
 	*pClkCtrlReg |= ( 1 << 17);
 	
 	//2. configure the mode of the IO pin 9 as output PE9
-	//a. clear the 16th and 17th bit positions (CLEAR)
+	//a. clear the 18th and 19th bit positions (CLEAR)
 	*pPortEModeReg &= ~( 3 << 18);
 	//b. make 16th bit position as 1 (SET)
 	*pPortEModeReg |= ( 1 << 18);
