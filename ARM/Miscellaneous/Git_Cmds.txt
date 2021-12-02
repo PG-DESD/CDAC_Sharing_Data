@@ -7,3 +7,20 @@ git push
 
 now two in one command
 git commit -a -m 'Add new benchmarks'
+
+To discard everything permanently:
+
+git reset --hard
+
+
+git-clean - Remove untracked files from the working tree
+
+# Print out the list of files and directories which will be removed (dry run)
+git clean -n -d
+Clean Step - beware: this will delete files:
+
+# Delete the files from the repository
+git clean -f
+To remove directories, run git clean -f -d or git clean -fd
+To remove ignored files, run git clean -f -X or git clean -fX
+To remove ignored and non-ignored files, run git clean -f -x or git clean -fx
