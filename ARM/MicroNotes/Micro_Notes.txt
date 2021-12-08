@@ -274,6 +274,7 @@ STM32CubeIDE
 2. Code Perspective C/C++
 3. Debug Perspective
 
+STM32F4
 LED's
 PD12
 PD13
@@ -283,6 +284,24 @@ PD15
 Button
 PA0(User) - Blue Button
 Reset- Black Button
+
+STM32F3
+LED's
+PE8  Blue
+PE9  Red
+PE10 Orange
+PE11 Green
+PE12 Blue2
+PE13 Red2
+PE14 Orange2
+PE15 Green2
+
+Button
+PA0(User) - Blue Button
+Reset- Black Button
+
+
+
 
 GPIO API's
 HAL_GPIO_TogglePin(GPIOD, LED1_Pin);
