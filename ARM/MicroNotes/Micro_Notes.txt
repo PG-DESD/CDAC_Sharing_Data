@@ -267,6 +267,19 @@ PC =0x2008
 LR =0x1004
 so that after you switch back to Thread 1 you can jump back to earlier function.
 
+The HAL driver supports three programming models for its data processing functions: 
+a. polling
+b. interrupt 
+c. DMA. 
+
+Blocking Mode
+Polling functions operate in blocking mode, meaning these functions will not return until the operation is complete.
+To prevent the application from hanging, the user must provide a suitable timeout value. 
+
+Non-Blocking Mode
+Interrupt and DMA functions operate in non-blocking mode, which means these functions will return after the operation 
+is initiated, allowing the application to continue execution while the operation continues in the background. 
+However, a callback function must be configured and enabled to handle the signal raised once the operation completes.
 
 STM32CubeIDE
 3 Perspectives are Availible
@@ -351,15 +364,15 @@ HAL_GPIO_WritePin(GPIOD, LED1_Pin, GPIO_PIN_SET);
 
 Assignment 1 
 
-Q1. Write a Program(GPIO_A1) and Configure Pins PD13 , PD14 
+Q1. Write a Program(GPIO_A1) and Configure Pins PD13/PE8 , PD14/PE9 
 to LED3, LED4 Respectively & Toggle the LED's connected to them , also configure SWD Feature?
 
-Q2. Write a Program(GPIO_A2) and Configure Pins PD12 to LED1 & 
+Q2. Write a Program(GPIO_A2) and Configure Pins PD12/PE8 to LED1 & 
 Set the LED's connected to the PIN for 500ms and Reset for 500ms , also configure SWD Feature?
 
 Q3. Write a Program(GPIO_A3) and Configure Pins 
 (Switch)PA0  to GPIO_Input ,
-(LED)   PD12 to GPIO_Output,
+(LED)   PD12/PE8 to GPIO_Output,
 Action:Toggle the LED's when Switch is Pressed , also configure SWD Feature?
  Part 1
  /* USER CODE BEGIN WHILE */
@@ -371,14 +384,15 @@ Action:Toggle the LED's when Switch is Pressed , also configure SWD Feature?
 		  		  	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 
 		  }
+  }
 Part 2
 /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)//
 		  {
-		  	  HAL_Delay(100); //Debouncing Delay
-		  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+		  	  HAL_Delay(100); //Debouncing Delay used to avoid Noise
+		  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)//
 		  		  {
 		  		  	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 
@@ -387,7 +401,7 @@ Part 2
 
 Q4. Write a Interrupt Driven Program(GPIO_A4) and Configure Pins 
 (Switch)PA0  to GPIO_EXTI0 ,
-(LED)   PD12 to GPIO_Output,
+(LED)   PE8/PD12 to GPIO_Output,
 NVIC GUI --> Enable EXTI line0 Interrupt
 Action:Toggle the LED's when Switch is Pressed , also configure SWD Feature?
 
@@ -420,8 +434,40 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 Flow
 							H/W Specific		H/W Specific
-Switch(EXTI0 Source)--> EXTIRq_Handler --> HAL_GPIO_EXTI_IRQHandler() --> 
+Switch(EXTI0 Source)--> EXTI0_IRQHandler --> HAL_GPIO_EXTI_IRQHandler() --> 
 Actual Funcion where we can Code HAL_GPIO_EXTI_Callback() 
+
+void EXTI0_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI0_IRQn 0 */
+
+  /* USER CODE END EXTI0_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+  /* USER CODE BEGIN EXTI0_IRQn 1 */
+
+  /* USER CODE END EXTI0_IRQn 1 */
+}
+
+void HAL_GPIO_EXTI_IRQHandler(uint16_t GPIO_Pin)
+{
+  /* EXTI line interrupt detected */
+  if(__HAL_GPIO_EXTI_GET_IT(GPIO_Pin) != 0x00u)
+  {
+    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
+    HAL_GPIO_EXTI_Callback(GPIO_Pin);
+  }
+}
+
+__weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(GPIO_Pin);
+
+  /* NOTE: This function should not be modified, when the callback is needed,
+           the HAL_GPIO_EXTI_Callback could be implemented in the user file
+   */
+}
+
 
 Assignment 2 Timer
 Theory:
@@ -970,8 +1016,27 @@ Rx_Y
 Rx_Z
 
 Assignment I2C
+When acting as an I2C master in blocking mode, there are four API functions available for communicating with a slave device:
 
+HAL_I2C_Master_Transmit()
+HAL_I2C_Master_Receive()
+HAL_I2C_Mem_Write()
+HAL_I2C_Mem_Read()
 
+SEND Data from Master to Slave
+To send data to a slave device in blocking mode, either the HAL_I2C_Master_Transmit() function or 
+the HAL_I2C_Mem_Write() function may be used. The two are interchangeable. 
+The only difference is that a memory address on the slave is explicitly specified as an argument to HAL_I2C_Mem_Write(). 
+The user should decide which is most appropriate for their application. 
+
+RECEIVE Data from Slave to Master
+To receive data from a slave device, either the HAL_I2C_Master_Receive() function or 
+the HAL_I2C_Mem_Read() function may be used. 
+However, these two functions are not interchangeable. 
+While HAL_I2C_Master_Receive() simply reads data from the slave device, 
+HAL_I2C_Mem_Read() first sends a memory address to the slave and then issues a repeated start condition 
+followed by a read operation to get the data located at that memory address. 
+The choice of which function to use depends on the I2C sequence expected by the slave device.
 
 * Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
