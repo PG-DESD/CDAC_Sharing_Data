@@ -479,8 +479,8 @@ Start 0  -- TOP 65535
 
 *Note:*Timer peripherals are always clocked through APBx timer clocks not APBx peripheral clocks*
 Counting Speed of the Counter Depends on Clock Freq. of Timer
-Timer is Connected to APB Bus
-16MHZ is the Clock for APB Bus
+Timer is Connected to APBx Timer Bus
+16MHZ/8MHZ is the Clock for APB Bus
 Agenda is to genrate a delay for 1MS Tick for the Counter (Incrementing Counter by 1 will take 1ms)
 Counter counting till 1000 @1MS Tick will genrate a Delay of 1Sec
 Running this Delay for 1000 Times(Counting till 1000) for Getting 1Sec
@@ -516,11 +516,11 @@ T=1/F = 1/4Khz=1/4000 = 0.25MS
 
 Q5 Write a Interrupt Driven Program(TIM_INT_A5) and 
 Configure Pins 
-(LED)   PD12 to GPIO_Output
+(LED)   PD12/PE8 to GPIO_Output
 
 Configure Peripherals TIMER2 (TIM2)
 Clock Source: Internal Clock
-PreScalar : 16000
+PreScalar : 16000/8000
 Conter Mode: UP
 Counter Period: 1000
 Trigger Event Selection : Update Event 
