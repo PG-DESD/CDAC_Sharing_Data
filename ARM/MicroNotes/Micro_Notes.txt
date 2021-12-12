@@ -540,15 +540,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 Q6 Write a Program(TIM_PWM_A6) to Learn Pulse Width Modulation and 
-Configure Peripherals TIMER4 (TIM4)
+Configure Peripherals TIMER4 (TIM4)					for STM32F3 	Configure Peripherals TIMER1 (TIM1)
 Clock Source: Internal Clock
-PreScalar : 15 +1 [Internally Prescaler + 1]
+PreScalar : 15 +1 [Internally Prescaler + 1]		for STM32F3 	PreScalar : 7 +1	
 Conter Mode: UP
-Counter Period: 99+1 [Internally Period + 1]
-Channel 1: PWM Genration CH1
-Channel 2: PWM Genration CH2
-Channel 3: PWM Genration CH3
-Channel 4: PWM Genration CH4
+Counter Period: 99+1 [Internally Period + 1]		 
+Channel 1: PWM Genration CH1						for STM32F3 	//Channel 1 is connected to PE9	
+Channel 2: PWM Genration CH2						for STM32F3 	//Channel 2 is connected to PE11	
+Channel 3: PWM Genration CH3						for STM32F3 	//Channel 3 is connected to PE13	
+Channel 4: PWM Genration CH4						for STM32F3 	//Channel 4 is connected to PE14	
 
 Action:Control the Brightness of LED , also configure SWD Feature?
 
@@ -570,10 +570,10 @@ Duty Cycle= Ton/ Ton + Toff
     int dutycycle=99;
 	
  /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_4);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_1);			for STM32F3 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_2);			for STM32F3 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);			for STM32F3 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_4);			for STM32F3 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_4);
   
 /* USER CODE BEGIN WHILE */
   while (1)
