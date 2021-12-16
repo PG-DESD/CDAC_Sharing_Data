@@ -870,6 +870,11 @@ Watch Dog Freq: 32Khz
 Prescalar : 64
 Effective Clock for WDG : 32Khz/ Prescalar = 32/64 =0.5 Khz = 2Ms * 4095 = 8190 ms ~ 8Sec
 
+for STM32F3
+Watch Dog Freq: 40Khz
+Prescalar : 64			
+Effective Clock for WDG : 40Khz/ Prescalar =40/64=0.625 Khz = 1.6 ms * 4095 = 6552 ms ~ 6.5Sec
+If we do not refresh IWDG within 6.5 Sec then it will reset the system
 
 Assignment 6 UART & DMA
 
