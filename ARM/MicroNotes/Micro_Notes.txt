@@ -812,16 +812,16 @@ Alarm Date :29      Turn on  LED14 with Alarm B
 /* USER CODE BEGIN 4 */
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 {
-	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
 }
 
 
 Assignment 5 Internal WatchDog
 Q12 Write a Interrupt Driven Program(IWDG_A12) to Learn Internal WatchDog Timer and 
 Configure Pins 
-(LED)   PD12 to GPIO_Output // Counter LED
-(LED)   PD13 to GPIO_Output // Watchdog Refresh
-(LED)   PD14 to GPIO_Output // System Reset
+(LED)   PD12 to GPIO_Output // Counter LED						//for STM32F3  PE8 	Counter LED
+(LED)   PD13 to GPIO_Output // Watchdog Refresh					//for STM32F3  PE9 	Watchdog Refresh LED
+(LED)   PD14 to GPIO_Output // System Reset						//for STM32F3  PE10 System ResetLED
 (Switch)PA0  to GPIO_Input  // Watchdog Refresh Switch
 
 Configure NVIC
@@ -842,7 +842,7 @@ IWDG Counter Prescalar : 64
 uint32_t counter=0;
 
 /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,SET); // For Showing System Reset
+  HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,SET); // For Showing System Reset //for F3 Replace with PE10
   HAL_Delay(2500);
   HAL_TIM_Base_Start_IT(&htim2);
   
@@ -853,15 +853,15 @@ uint32_t counter=0;
 	  if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0))
 	  	  {
 	  		  HAL_IWDG_Refresh(&hiwdg);
-	  		  HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_13); //WatchDog Refresh LED
+	  		  HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_13); //WatchDog Refresh LED //for F3 Replace with PE9
 	  	  }
  }
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,RESET);// Just for Counting , to show something is running
-	HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_12);
+{	// Just for Counting , to show something is running
+	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,RESET);//for F3 Replace with PE10 
+	HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_12);//for F3 Replace with PE8
 	counter++;
 }
 
