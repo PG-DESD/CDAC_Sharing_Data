@@ -679,6 +679,11 @@ Assignment 3 ADC
 Theory:
 Sucessive Approximation ADC
 Total Conversion Time 
+The elapsed time between the start of a conversion and the end of conversion is the sum of
+the configured sampling time plus the successive approximation time depending on data
+resolution:
+
+For Calculations  Related to STM32F3 Refer Notes.docx
 
 Totalcycles = Sampling + 12 Cycles
 
