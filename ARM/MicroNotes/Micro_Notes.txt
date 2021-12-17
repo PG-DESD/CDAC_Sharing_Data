@@ -894,11 +894,11 @@ No Parity
 Also configure SWD Feature?
 
 /*****************Connection from STM32Board to USB to Serial FTDI Connector FT232R***************/
- STM   			FT232R          
-PA0 Tx----------Rx
-PA1 Rx----------Tx
-Gnd GND---------GND
-	5V----------5V
+STM32F4  STM32F3 			FT232R          
+PA0 		PC10	Tx----------Rx
+PA1 		PC11	Rx----------Tx
+Gnd 		GND		GND---------GND
+Optional			5V----------5V
 
 
 /* USER CODE BEGIN Includes */
