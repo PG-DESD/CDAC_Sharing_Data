@@ -946,6 +946,7 @@ char rx;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	 HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+	 rx=rx+1;
 	 HAL_UART_Transmit(&huart4, (uint8_t *)&rx, 1, 10);
 }
 
