@@ -916,6 +916,11 @@ while (1)
     /* USER CODE END WHILE */
 }
 
+PART 2
+HAL_UART_Receive(&huart4, (uint8_t *)tx, strlen(tx), 10);
+HAL_Delay(500);
+HAL_UART_Transmit(&huart4, (uint8_t *)tx, strlen(tx), 10);
+
 Q14 Write a Interrupt Driven Program(UART_Echo_A14) to Learn UART RX TX Functionality and 
 Configure Pins 
 (LED)   PD12 to GPIO_Output // Interrupt Confirmation LED
@@ -950,7 +955,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	 HAL_UART_Transmit(&huart4, (uint8_t *)&rx, 1, 10);
 }
 
-Part 2
+Part 2 Assignment
 
 Transmit Entire String when user press Enter Key
 
