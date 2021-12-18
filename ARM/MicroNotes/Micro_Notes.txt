@@ -987,23 +987,23 @@ DMA Settings:
 Press Add Button and Select- UART4_RX
 Direction : Peripheral to Memory
 DMA Request Setting:
-Mode : Circular
+Mode : Normal
 
 Also configure SWD Feature?
 
 
 /* USER CODE BEGIN PV */
-uint8_t UART1_rxBuffer[12] = {0};
+uint8_t UART1_rxBuffer;
 
-//* USER CODE BEGIN 2 */
-  HAL_UART_Receive_DMA (&huart4, UART1_rxBuffer, 12);
-  
+ /* USER CODE BEGIN 2 */
+HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
+	  
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-	HAL_UART_Transmit(&huart4, UART1_rxBuffer, 12, 100);
-    HAL_UART_Receive_DMA(&huart4, UART1_rxBuffer, 12);
+	 HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_8);
+	 HAL_UART_Transmit(&huart4,(uint8_t*) &UART1_rxBuffer, 1,10);
+	 HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
 }
 
 
