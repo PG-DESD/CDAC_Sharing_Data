@@ -1014,6 +1014,63 @@ RW
 1 0 0 0 0 0 0 0  Read (0x80) | CMD
 0 0 0 0 0 0 0 0  Write(0x00) | CMD
 
+for Stm32F3
+//PV
+uint8_t ReadFlag=0x80;
+uint8_t MultiByte=0x40;
+uint8_t Return[2];
+uint16_t Rx_x,Rx_y,Rx_z;
+
+//Who am I Checking
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+TxBuf[0]=0x0f|ReadFlag;//Read Address of Register
+HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+HAL_SPI_Receive(&hspi1, Return, 1, 50);
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+//Configure Control Register 1 with Address 0x20
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+TxBuf[0]=0x20;//Address of Register
+TxBuf[1]=0x3F;//Data for Register
+HAL_SPI_Transmit(&hspi1, TxBuf, 2, 50);
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+//Configure Control Register 4 with Address 0x23
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+TxBuf[0]=0x23;//Address of Register
+TxBuf[1]=0x10;//Data for Register
+HAL_SPI_Transmit(&hspi1, TxBuf, 2, 50);
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+
+while(1)
+{
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+	TxBuf[0]=0x28|ReadFlag|MultiByte;//Read Multi Byte Address of Register for X
+	HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+	HAL_SPI_Receive(&hspi1, Return, 2, 50);
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+	
+	Rx_x= (Return[1]<<8)|Return[0]
+	
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+	TxBuf[0]=0x2A|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Y
+	HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+	HAL_SPI_Receive(&hspi1, Return, 2, 50);
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+	
+	Rx_y= (Return[1]<<8)|Return[0]
+	
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+	TxBuf[0]=0x2C|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Z
+	HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+	HAL_SPI_Receive(&hspi1, Return, 2, 50);
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+	
+	Rx_z= (Return[1]<<8)|Return[0]
+	
+}
+	
+
+
+for Stm32F4
 0x20 Control Register4
 0x37 Value to be set in Control Register (for enabling XYZ Axis, Setting Feqn. 12.5Hz)
 
