@@ -1,0 +1,2 @@
+network_data.c:1549:11:ai_network_data_weights_get	4	static
+network_data.c:1568:9:ai_network_data_params_get	32	static

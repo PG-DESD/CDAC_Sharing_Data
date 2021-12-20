@@ -1,0 +1,5 @@
+stm32f3xx_hal_msp.c:63:6:HAL_MspInit	16	static
+stm32f3xx_hal_msp.c:85:6:HAL_CRC_MspInit	24	static
+stm32f3xx_hal_msp.c:107:6:HAL_CRC_MspDeInit	16	static
+stm32f3xx_hal_msp.c:129:6:HAL_I2C_MspInit	48	static
+stm32f3xx_hal_msp.c:165:6:HAL_I2C_MspDeInit	16	static

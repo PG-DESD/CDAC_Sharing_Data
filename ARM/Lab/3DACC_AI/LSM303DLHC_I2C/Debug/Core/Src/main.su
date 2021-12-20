@@ -1,0 +1,9 @@
+main.c:83:5:main	40	static
+main.c:199:6:SystemClock_Config	128	static
+main.c:244:13:MX_CRC_Init	8	static
+main.c:275:13:MX_I2C1_Init	8	static
+main.c:321:13:MX_GPIO_Init	40	static
+main.c:343:13:AI_Init	72	static
+main.c:367:13:AI_Run	80	static
+main.c:390:17:argmax	32	static
+main.c:408:6:Error_Handler	4	static,ignoring_inline_asm
