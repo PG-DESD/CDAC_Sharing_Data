@@ -826,6 +826,7 @@ Configure Pins
 
 Configure NVIC
 NVIC GUI --> TIMER2 GLOBAL INTERRUPT Enable
+50Period * x = 6000ms , x =120
 
 Action: Observe the Counter Variable it will start from 0 to 59 [60 counts], 60Count * 100 Period = 6000 ms and 500ms HAL Delay,
 total 6500ms as the IWDG freq. for F3 is set to 40Khz , Pre Scalar is 64, 40/64=0.625 Khz = 1.6 ms * 4095 = 6552 ms ~ 6.5Sec,
