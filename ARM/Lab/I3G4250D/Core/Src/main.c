@@ -47,7 +47,7 @@ int16_t Rx_x,Rx_y,Rx_z;
 float X_degree,Y_degree,Z_degree;
 uint8_t ReadFlag=0x80;
 uint8_t MultiByteFlag=0x40;
-uint8_t Senstivity=8.75;
+float Senstivity=8.75;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
