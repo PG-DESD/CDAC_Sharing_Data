@@ -43,9 +43,11 @@ SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
 uint8_t Return[2],TxBuf[2];
-uint16_t Rx_x,Rx_y,Rx_z;
+int16_t Rx_x,Rx_y,Rx_z;
+float X_degree,Y_degree,Z_degree;
 uint8_t ReadFlag=0x80;
 uint8_t MultiByteFlag=0x40;
+uint8_t Senstivity=8.75;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -105,7 +107,7 @@ int main(void)
 
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
   TxBuf[0]=0x23;//Address of Register
-  TxBuf[1]=0x10;//Address of Register
+  TxBuf[1]=0x00;//Address of Register
   HAL_SPI_Transmit(&hspi1, TxBuf, 2, 50);
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
   /* USER CODE END 2 */
@@ -120,6 +122,7 @@ int main(void)
 	  HAL_SPI_Receive(&hspi1, Return, 2, 50);
 	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
 	  Rx_x = ((int16_t)((uint16_t)Return[1]<<8) | Return[0]);
+	  X_degree= (Rx_x*Senstivity)/1000;
 
 	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
 	  TxBuf[0]=0x2A|ReadFlag|MultiByteFlag;//Read Address of Register
@@ -127,6 +130,7 @@ int main(void)
 	  HAL_SPI_Receive(&hspi1, Return, 2, 50);
 	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
 	  Rx_y = ((int16_t)((uint16_t)Return[1]<<8) | Return[0]);
+	  Y_degree= (Rx_y*Senstivity)/1000;
 
 	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
 	  TxBuf[0]=0x2C|ReadFlag|MultiByteFlag;//Read Address of Register
@@ -134,6 +138,7 @@ int main(void)
 	  HAL_SPI_Receive(&hspi1, Return, 2, 50);
 	  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
 	  Rx_z = ((int16_t)((uint16_t)Return[1]<<8) | Return[0]);
+	  Z_degree= (Rx_z*Senstivity)/1000;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
