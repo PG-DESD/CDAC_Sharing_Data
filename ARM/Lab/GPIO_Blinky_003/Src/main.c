@@ -6,7 +6,43 @@
   * @brief   Default main function.
   ******************************************************************************
 */
+/**
 
+/**
+To understand the port definitions in C, we remember #define is simply a copy paste. E.g.,
+
+    #define PD12   (*((volatile unsigned long *)0x40004080))
+    data = PD12;
+
+becomes
+
+    data = (*((volatile unsigned long *)0x40004080));
+
+To understand why we define ports this way, let’s break this port definition into pieces. First, 0x40004080 is the address of Port A bit 5. If we write just #define PD12 0x40004080 it will create
+
+    data = 0x40004080;
+
+which does not read the contents of PD12 as desired. This means we need to dereference the address. If we write #define PD12 (*0x40004080) it will create
+
+    data = (*0x40004080);
+
+This will attempt to read the contents at 0x40004080, but doesn’t know whether to read 8, 16, or 32 bits. So the compiler gives a syntax error because the type of data does not match the type of (*0x40004080).  To solve a type mismatch in C we typecast, placing a (new type) in front of the object we wish to convert. We wish force the type conversion to unsigned 32 bits, so we modify the definition to include the typecast. 
+
+The volatile is added because the value of a port can change beyond the direct action of the software. It forces the C compiler to read a new value each time through a loop and not rely on the previous value.  
+#define PD12   (*((volatile unsigned long *)0x40004080))
+void wait(void){
+  while((PD12&0x20)==0){};
+}
+void wait2(void){
+  while(((*((volatile unsigned long *)0x40004080))&0x20)==0){};
+}
+void wait3(void){
+  volatile unsigned long *pt;
+  pt = ((volatile unsigned long *)0x40004080);
+  while(((*pt)&0x20)==0){};
+
+*/
+*/
 #include<stdint.h>
 
 int main(void)
