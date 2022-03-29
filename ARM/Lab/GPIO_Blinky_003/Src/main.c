@@ -18,7 +18,7 @@ becomes
 
     data = (*((volatile unsigned long *)0x40004080));
 
-To understand why we define ports this way, let’s break this port definition into pieces. First, 0x40004080 is the address of Port A bit 5. If we write just #define PD12 0x40004080 it will create
+To understand why we define ports this way, let’s break this port definition into pieces. First, 0x40004080 is the address of Port D bit 12. If we write just #define PD12 0x40004080 it will create
 
     data = 0x40004080;
 
