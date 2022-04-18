@@ -433,7 +433,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 Flow
-							H/W Specific		H/W Specific
+							H/W Specific		HAL Specific
 Switch(EXTI0 Source)--> EXTI0_IRQHandler --> HAL_GPIO_EXTI_IRQHandler() --> 
 Actual Funcion where we can Code HAL_GPIO_EXTI_Callback() 
 
@@ -588,7 +588,7 @@ Duty Cycle= Ton/ Ton + Toff
 	  HAL_Delay(25); // for Proper Fading Affect
 }
 
-Q7 Write a Program(TIM_OC_A7) to Learn Timer Output Compare and 
+Q7.1 Write a Program(TIM_OC_A7_1) to Learn Timer Output Compare and 
 Configure Peripherals TIMER4 (TIM4)
 Clock Source: Internal Clock
 PreScalar : 16000
@@ -614,6 +614,75 @@ Action:Control the Motion Sequence of LED , also configure SWD Feature?
   HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_2);
   HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
   HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_4);
+
+Q7.2 Write a Program(TIM_OC_A7_2) to Learn Timer Output Compare in Interrupt Mode and 
+Configure Peripherals TIMER4 (TIM4)
+Clock Source: Internal Clock
+PreScalar : 16000
+Conter Mode: UP
+Counter Period: 10000
+Trigger Event Selection: Compare Pulse (OC1)
+Channel 1: Output Compare CH1
+Channel 2: Output Compare CH2
+Channel 3: Output Compare CH3
+Channel 4: Output Compare CH4
+CH1 Pulse 250, 
+	Mode Toggle
+CH2 Pulse 500, 
+	Mode Toggle
+CH3 Pulse 750, 
+	Mode Toggle
+CH4 Pulse 1000, 
+	Mode Toggle
+
+Action:Control the Toggoling Fequency of LED, also configure SWD Feature?
+/* USER CODE BEGIN PV */
+ volatile uint32_t pulse1_value = 250; //to produce 4Hz
+ volatile uint32_t pulse2_value = 500; //to produce 2HZ
+ volatile uint32_t pulse3_value = 750;  //to produce 1.33Hz
+ volatile uint32_t pulse4_value = 1000;  //to produce 1Hz
+ volatile uint32_t ccr_content;
+
+ /* USER CODE BEGIN 2 */
+  HAL_TIM_OC_Start_IT(&htim4,TIM_CHANNEL_1);
+  HAL_TIM_OC_Start_IT(&htim4,TIM_CHANNEL_2);
+  HAL_TIM_OC_Start_IT(&htim4,TIM_CHANNEL_3);
+  HAL_TIM_OC_Start_IT(&htim4,TIM_CHANNEL_4);
+  
+  /* USER CODE BEGIN 4 */
+void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
+ {
+   /* TIM3_CH1 toggling with frequency = 4 Hz */
+   if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+   {
+	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_1,ccr_content+pulse1_value);
+   }
+
+   /* TIM3_CH2 toggling with frequency = 2 Hz */
+   if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+   {
+	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_2);
+	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_2,ccr_content+pulse2_value);
+
+   }
+
+   /* TIM3_CH3 toggling with frequency = 1.33 Hz */
+   if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3)
+   {
+	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_3);
+	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_3,ccr_content+pulse3_value);
+
+   }
+
+   /* TIM3_CH4 toggling with frequency = 1 Hz */
+   if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
+   {
+	    ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4);
+	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_4,ccr_content+pulse4_value);
+
+   }
+ }
 
 Q8 Write a Program(TIM_IC_A8) to Learn Timer Input Capture Mode and 
 Configure Peripherals TIMER2 (TIM2)
