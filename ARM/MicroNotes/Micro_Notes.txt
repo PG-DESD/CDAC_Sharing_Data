@@ -753,8 +753,19 @@ the configured sampling time plus the successive approximation time depending on
 resolution:
 
 For Calculations  Related to STM32F3 Refer Notes.docx
+For Calculations  Related to STM32F4 Refer Pg 420 of MicrocontrollerReference Manual
 
-Totalcycles = Sampling + 12 Cycles
+Total Conversion Time = Sampling Time + 12 Cycles
+
+where Sampling time can range between 3Cycles to 480Cycles
+
+For Example : if Sampling Time =3 Cycles, ADC Freq is 1 Mhz
+
+T conv = 3 + 12 =15 cycles * ADC Freq = 15 * 1 us = 15us
+
+if Sampling Time =480 Cycles, ADC Freq is 2 Mhz
+
+T conv = 480 + 12 =492 cycles * ADC Freq = 492 * 0.5 us = 246us
 
 Calculation for Sampling Time
 APB Clk= 16 MHz
