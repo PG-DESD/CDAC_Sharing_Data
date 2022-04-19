@@ -895,6 +895,32 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
 }
 
+/* Optional Part to Print Time Stamp on Button Press */
+PreRequisite:
+Set PA0 to EXTI0
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	  char showtime[50];
+	  RTC_DateTypeDef sdatestructureget;
+	  RTC_TimeTypeDef stimestructureget;
+
+	  memset(&sdatestructureget,0,sizeof(sdatestructureget));
+	  memset(&stimestructureget,0,sizeof(stimestructureget));
+	  /* Get the RTC current Time */
+	  HAL_RTC_GetTime(&hrtc, &stimestructureget, RTC_FORMAT_BIN);
+	  /* Get the RTC current Date */
+	  HAL_RTC_GetDate(&hrtc, &sdatestructureget, RTC_FORMAT_BIN);
+	  /* Display time Format : hh:mm:ss */
+	  sprintf((char*)showtime,"%02d:%02d:%02d  ",stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
+	  printf("Current Time %s",showtime);
+	  printf("Current Time %d",(uint8_t*)showtime);
+	  memset(showtime,0,sizeof(showtime));
+	  sprintf((char*)showtime,"%02d-%2d-%2d\r\n",sdatestructureget.Month, sdatestructureget.Date, 2000 + sdatestructureget.Year);
+	  printf("Current Date %s",showtime);
+	  printf("Current Date %d",(uint8_t*)showtime);
+
+}
 
 Assignment 5 Internal WatchDog
 Q12 Write a Interrupt Driven Program(IWDG_A12) to Learn Internal WatchDog Timer and 
