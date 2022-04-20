@@ -1336,3 +1336,5 @@ Template Node JSON Data
     ],
     "accesspoint" : 0
 }
+
+https://wiki.st.com/stm32mcu/wiki/STM32CubeMonitor:How_to_write_a_variable_from_flow
