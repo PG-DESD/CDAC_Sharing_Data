@@ -1027,9 +1027,11 @@ while (1)
 }
 
 PART 2
-HAL_UART_Receive(&huart4, (uint8_t *)tx, strlen(tx), 10);
-HAL_Delay(500);
-HAL_UART_Transmit(&huart4, (uint8_t *)tx, strlen(tx), 10);
+
+HAL_UART_Receive(&huart4, (uint8_t *)tx,1, 10);
+HAL_Delay(50);
+HAL_UART_Transmit(&huart4, (uint8_t *)tx,1, 10);
+bzero(tx,1);
 
 Q14 Write a Interrupt Driven Program(UART_Echo_A14) to Learn UART RX TX Functionality and 
 Configure Pins 
