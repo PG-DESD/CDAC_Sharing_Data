@@ -1008,7 +1008,7 @@ STM32F4  STM32F3 			FT232R
 PA0 		PC10	Tx----------Rx
 PA1 		PC11	Rx----------Tx
 Gnd 		GND		GND---------GND
-Optional			5V----------5V
+Optional		  5V/3V----------5V/3V Based on Jumper Setting
 
 
 /* USER CODE BEGIN Includes */
