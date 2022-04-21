@@ -1206,6 +1206,26 @@ Rx_Y
 Rx_Z
 
 Assignment I2C
+How to handle I2C data buffer transmission/reception between two boards, 
+in polling mode.
+
+   _________________________                        _________________________
+  |           ______________|                      |______________           |
+  |          | I2C1         |                      |          I2C1|          |
+  |          |              |                      |              |          |
+  |          |      SCL(PB6)|______________________|(PB6)SCL      |          |
+  |          |              |                      |              |          |
+  |          |              |                      |              |          |
+  |          |              |                      |              |          |
+  |          |      SDA(PB9)|______________________|(PB9)SDA      |          |
+  |          |              |                      |              |          |
+  |          |______________|                      |______________|          |
+  |      __                 |                      |      __                 |
+  |     |__|                |                      |     |__|                |
+  |     USER                |                      |     USER                |
+  |                      GND|______________________|GND                      |
+  |_STM32F4 ________________|                      |_________________STM32F4_|
+
 Q17. Write a I2C Program to Communicate between Two STM32F4 Boards and Send LED_ON Info?
 Configure Pins 
 (LED)   PD12 to GPIO_Output 
@@ -1213,7 +1233,8 @@ Configure Pins
 (LED)   PD14 to GPIO_Output 
 (LED)   PD15 to GPIO_Output 
 (Button)PA0  to GPIO_Input
-
+SDA(PB9)
+SCL(PB6)
 Configure Peripherals I2C (I2C1)
 Mode : I2C
 Master Feature 
