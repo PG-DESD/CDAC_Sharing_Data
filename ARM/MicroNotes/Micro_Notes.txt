@@ -1010,6 +1010,7 @@ PA1 		PC11	Rx----------Tx
 Gnd 		GND		GND---------GND
 Optional		  5V/3V----------5V/3V Based on Jumper Setting
 
+Part 1 Transmit Only
 
 /* USER CODE BEGIN Includes */
 #include "string.h"
@@ -1026,7 +1027,7 @@ while (1)
     /* USER CODE END WHILE */
 }
 
-PART 2
+PART 2 Transmit and Receive Both
 
 HAL_UART_Receive(&huart4, (uint8_t *)tx,1, 10);
 HAL_Delay(50);
