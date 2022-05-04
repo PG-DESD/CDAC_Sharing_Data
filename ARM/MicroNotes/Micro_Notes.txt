@@ -622,6 +622,9 @@ PreScalar : 16000
 Conter Mode: UP
 Counter Period: 10000
 Trigger Event Selection: Compare Pulse (OC1)
+Configure NVIC
+NVIC GUI --> TIMER4 GLOBAL INTERRUPT Enable
+
 Channel 1: Output Compare CH1
 Channel 2: Output Compare CH2
 Channel 3: Output Compare CH3
@@ -635,7 +638,7 @@ CH3 Pulse 750,
 CH4 Pulse 1000, 
 	Mode Toggle
 
-Action:Control the Toggoling Fequency of LED, also configure SWD Feature?
+Action:Control the Toggoling Fequency of each LED at different rate, also configure SWD Feature?
 /* USER CODE BEGIN PV */
  volatile uint32_t pulse1_value = 250; //to produce 4Hz
  volatile uint32_t pulse2_value = 500; //to produce 2HZ
@@ -657,6 +660,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
    {
 	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
 	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_1,ccr_content+pulse1_value);
+	   //to update the compare values at 250,500,750,1000,1250,1500....10000
    }
 
    /* TIM3_CH2 toggling with frequency = 2 Hz */
@@ -664,7 +668,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
    {
 	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_2);
 	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_2,ccr_content+pulse2_value);
-
+		//to update the compare values at 500,1000,1500,2000,2500,3000....10000
    }
 
    /* TIM3_CH3 toggling with frequency = 1.33 Hz */
@@ -672,7 +676,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
    {
 	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_3);
 	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_3,ccr_content+pulse3_value);
-
+		//to update the compare values at 750,1500,2250,3000....10000
    }
 
    /* TIM3_CH4 toggling with frequency = 1 Hz */
@@ -680,7 +684,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
    {
 	    ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4);
 	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_4,ccr_content+pulse4_value);
-
+		//to update the compare values at 1000,2000,3000,4000....10000
    }
  }
 
