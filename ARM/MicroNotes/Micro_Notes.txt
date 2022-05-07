@@ -1,13 +1,13 @@
 PC[Program Counter]
 SP[Stak Pointer] Higher Address---> Lower Address---
 
-0x00008	int main(void)					
-0x0000C		{
-	
-0x00010			printf("Hello world\n");		// Blinking the LED Turn ON LED_x
+0x00008 int main(void)                  
+0x0000C     {
+    
+0x00010         printf("Hello world\n");        // Blinking the LED Turn ON LED_x
 
-0x00014			for(;;);						// infinte loop while(1)
-0x00018		}
+0x00014         for(;;);                        // infinte loop while(1)
+0x00018     }
 
 
 label: rjmp label
@@ -150,9 +150,9 @@ Condition 1: without Control Register & Without MPU
   RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 128K
   MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
 Condition 2: with Control Register in Action and Without MPU
-	we have Privledge Mode (When System Starts/ at Startup) & UnPrivledge Thread Mode 
+    we have Privledge Mode (When System Starts/ at Startup) & UnPrivledge Thread Mode 
 Condition 3: with Control Register in Action and With MPU
-	Specific Task are alocated specific memory regions and if any voilation happens then Mem. Fault Occurs
+    Specific Task are alocated specific memory regions and if any voilation happens then Mem. Fault Occurs
 
 Stack:
 When Free RTOS:
@@ -378,26 +378,26 @@ Action:Toggle the LED's when Switch is Pressed , also configure SWD Feature?
  /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
-		  {
-		  	  
-		  		  	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+      if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+          {
+              
+                      HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 
-		  }
+          }
   }
 Part 2
 /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)//
-		  {
-		  	  HAL_Delay(100); //Debouncing Delay used to avoid Noise
-		  	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)//
-		  		  {
-		  		  	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+      if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)//
+          {
+              HAL_Delay(100); //Debouncing Delay used to avoid Noise
+              if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)//
+                  {
+                      HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 
-		  		  }
-		  }
+                  }
+          }
 
 Q4. Write a Interrupt Driven Program(GPIO_A4) and Configure Pins 
 (Switch)PA0  to GPIO_EXTI0 ,
@@ -413,27 +413,27 @@ uint8_t flag=0;
 /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(1 == flag)
-	  {
-		  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-		  flag=0;
-	  }
+      if(1 == flag)
+      {
+          HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+          flag=0;
+      }
 
 
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	flag=1;
+    flag=1;
 }
 
 Part 2
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 }
 
 Flow
-							H/W Specific		HAL Specific
+                            H/W Specific        HAL Specific
 Switch(EXTI0 Source)--> EXTI0_IRQHandler --> HAL_GPIO_EXTI_IRQHandler() --> 
 Actual Funcion where we can Code HAL_GPIO_EXTI_Callback() 
 
@@ -494,7 +494,7 @@ Freq.= 1/Time
 
 
 At a Freq. of 1KHZ if we count till 1000 we get 1Sec of Delay
-			  1MS          *        1000     =  1Sec
+              1MS          *        1000     =  1Sec
 
 Part 1 For a Delay of 200 MS , if Prescalar is 16000 and APB Bus Freq is 16Mhz, What is the count Required?
 16000000/16000=1000=1Khz = 1MS * 200(count) = 200MS
@@ -536,19 +536,19 @@ Action:Toggle the LED's when Timer time Elapsed or Timer Expire , also configure
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 }
 
 Q6 Write a Program(TIM_PWM_A6) to Learn Pulse Width Modulation and 
-Configure Peripherals TIMER4 (TIM4)					for STM32F3 	Configure Peripherals TIMER1 (TIM1)
+Configure Peripherals TIMER4 (TIM4)                 for STM32F3     Configure Peripherals TIMER1 (TIM1)
 Clock Source: Internal Clock
-PreScalar : 15 +1 [Internally Prescaler + 1]		for STM32F3 	PreScalar : 7 +1	
+PreScalar : 15 +1 [Internally Prescaler + 1]        for STM32F3     PreScalar : 7 +1    
 Conter Mode: UP
-Counter Period: 99+1 [Internally Period + 1]		 
-Channel 1: PWM Genration CH1						for STM32F3 	//Channel 1 is connected to PE9	
-Channel 2: PWM Genration CH2						for STM32F3 	//Channel 2 is connected to PE11	
-Channel 3: PWM Genration CH3						for STM32F3 	//Channel 3 is connected to PE13	
-Channel 4: PWM Genration CH4						for STM32F3 	//Channel 4 is connected to PE14	
+Counter Period: 99+1 [Internally Period + 1]         
+Channel 1: PWM Genration CH1                        for STM32F3     //Channel 1 is connected to PE9 
+Channel 2: PWM Genration CH2                        for STM32F3     //Channel 2 is connected to PE11    
+Channel 3: PWM Genration CH3                        for STM32F3     //Channel 3 is connected to PE13    
+Channel 4: PWM Genration CH4                        for STM32F3     //Channel 4 is connected to PE14    
 
 Action:Control the Brightness of LED , also configure SWD Feature?
 
@@ -564,28 +564,28 @@ PreScalar=15
 1MHZ=0.001MS=1MicroSec
 PWM Frequency = [16 Mhz] / [(15+1)*(99+1)] = 10 kHz
 Duty Cycle= Ton/ Ton + Toff
-				
+                
 
 /* USER CODE BEGIN 1 */
     int dutycycle=99;
-	
+    
  /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_1);			for STM32F3 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_2);			for STM32F3 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);			for STM32F3 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3);
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_4);			for STM32F3 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_4);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_1);          for STM32F3     HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_2);          for STM32F3     HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);          for STM32F3     HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_4);          for STM32F3     HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_4);
   
 /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  htim4.Instance->CCR1 = dutycycle; // Capture and Compare Register1
-	  htim4.Instance->CCR2 = dutycycle; // Capture and Compare Register2
-	  htim4.Instance->CCR3 = dutycycle;
-	  htim4.Instance->CCR4 = dutycycle;
-	  dutycycle -=1;
-	  if(dutycycle<1) 
-	  dutycycle=99;
-	  HAL_Delay(25); // for Proper Fading Affect
+      htim4.Instance->CCR1 = dutycycle; // Capture and Compare Register1
+      htim4.Instance->CCR2 = dutycycle; // Capture and Compare Register2
+      htim4.Instance->CCR3 = dutycycle;
+      htim4.Instance->CCR4 = dutycycle;
+      dutycycle -=1;
+      if(dutycycle<1) 
+      dutycycle=99;
+      HAL_Delay(25); // for Proper Fading Affect
 }
 
 Q7.1 Write a Program(TIM_OC_A7_1) to Learn Timer Output Compare and 
@@ -599,13 +599,13 @@ Channel 2: Output Compare CH2
 Channel 3: Output Compare CH3
 Channel 4: Output Compare CH4
 CH1 Pulse 250, 
-	Mode Toggle
+    Mode Toggle
 CH2 Pulse 500, 
-	Mode Toggle
+    Mode Toggle
 CH3 Pulse 750, 
-	Mode Toggle
+    Mode Toggle
 CH4 Pulse 1000, 
-	Mode Toggle
+    Mode Toggle
 
 Action:Control the Motion Sequence of LED , also configure SWD Feature?
 
@@ -630,13 +630,13 @@ Channel 2: Output Compare CH2
 Channel 3: Output Compare CH3
 Channel 4: Output Compare CH4
 CH1 Pulse 250, 
-	Mode Toggle
+    Mode Toggle
 CH2 Pulse 500, 
-	Mode Toggle
+    Mode Toggle
 CH3 Pulse 750, 
-	Mode Toggle
+    Mode Toggle
 CH4 Pulse 1000, 
-	Mode Toggle
+    Mode Toggle
 
 Action:Control the Toggoling Fequency of each LED at different rate, also configure SWD Feature?
 /* USER CODE BEGIN PV */
@@ -658,33 +658,33 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
    /* TIM3_CH1 toggling with frequency = 4 Hz */
    if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
    {
-	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
-	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_1,ccr_content+pulse1_value);
-	   //to update the compare values at 250,500,750,1000,1250,1500....10000
+       ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+       __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_1,ccr_content+pulse1_value);
+       //to update the compare values at 250,500,750,1000,1250,1500....10000
    }
 
    /* TIM3_CH2 toggling with frequency = 2 Hz */
    if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
    {
-	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_2);
-	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_2,ccr_content+pulse2_value);
-		//to update the compare values at 500,1000,1500,2000,2500,3000....10000
+       ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_2);
+       __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_2,ccr_content+pulse2_value);
+        //to update the compare values at 500,1000,1500,2000,2500,3000....10000
    }
 
    /* TIM3_CH3 toggling with frequency = 1.33 Hz */
    if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3)
    {
-	   ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_3);
-	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_3,ccr_content+pulse3_value);
-		//to update the compare values at 750,1500,2250,3000....10000
+       ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_3);
+       __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_3,ccr_content+pulse3_value);
+        //to update the compare values at 750,1500,2250,3000....10000
    }
 
    /* TIM3_CH4 toggling with frequency = 1 Hz */
    if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
    {
-	    ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4);
-	   __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_4,ccr_content+pulse4_value);
-		//to update the compare values at 1000,2000,3000,4000....10000
+        ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4);
+       __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_4,ccr_content+pulse4_value);
+        //to update the compare values at 1000,2000,3000,4000....10000
    }
  }
 
@@ -721,10 +721,10 @@ while (1)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim->Instance == TIM2)  //Confirming weather Interrupt Genrated from TIM2 as the ISR is common for All Timers
-	{
-		inputCaptureVal = __HAL_TIM_GetCounter(htim); // Get the Button Press Timing
-	}
+    if(htim->Instance == TIM2)  //Confirming weather Interrupt Genrated from TIM2 as the ISR is common for All Timers
+    {
+        inputCaptureVal = __HAL_TIM_GetCounter(htim); // Get the Button Press Timing
+    }
 }
 
 Freq:16MHZ
@@ -867,15 +867,15 @@ Activate Calender : Check
 Alarm A : Internal Alarm
 
 Calender Time:-
-Hours  	: 23
-Minute	: 59
-Second	: 50
+Hours   : 23
+Minute  : 59
+Second  : 50
 
 Calender Date:-
-Weekday	: Thursday
-Month	: January
-Date	: 28
-Year	: 2021
+Weekday : Thursday
+Month   : January
+Date    : 28
+Year    : 2021
 
 Alarm A:
 Time: 00:00:00
@@ -889,14 +889,14 @@ Alarm Date :29      Turn on  LED14 with Alarm B
 /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13); // Just to show that something is running on the board
-	  HAL_Delay(500);
+      HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13); // Just to show that something is running on the board
+      HAL_Delay(500);
   }
 
 /* USER CODE BEGIN 4 */
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 {
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
 }
 
 /* Optional Part to Print Time Stamp on Button Press */
@@ -905,33 +905,33 @@ Set PA0 to EXTI0
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	  char showtime[50];
-	  RTC_DateTypeDef sdatestructureget;
-	  RTC_TimeTypeDef stimestructureget;
+      char showtime[50];
+      RTC_DateTypeDef sdatestructureget;
+      RTC_TimeTypeDef stimestructureget;
 
-	  memset(&sdatestructureget,0,sizeof(sdatestructureget));
-	  memset(&stimestructureget,0,sizeof(stimestructureget));
-	  /* Get the RTC current Time */
-	  HAL_RTC_GetTime(&hrtc, &stimestructureget, RTC_FORMAT_BIN);
-	  /* Get the RTC current Date */
-	  HAL_RTC_GetDate(&hrtc, &sdatestructureget, RTC_FORMAT_BIN);
-	  /* Display time Format : hh:mm:ss */
-	  sprintf((char*)showtime,"%02d:%02d:%02d  ",stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
-	  printf("Current Time %s",showtime);
-	  printf("Current Time %d",(uint8_t*)showtime);
-	  memset(showtime,0,sizeof(showtime));
-	  sprintf((char*)showtime,"%02d-%2d-%2d\r\n",sdatestructureget.Month, sdatestructureget.Date, 2000 + sdatestructureget.Year);
-	  printf("Current Date %s",showtime);
-	  printf("Current Date %d",(uint8_t*)showtime);
+      memset(&sdatestructureget,0,sizeof(sdatestructureget));
+      memset(&stimestructureget,0,sizeof(stimestructureget));
+      /* Get the RTC current Time */
+      HAL_RTC_GetTime(&hrtc, &stimestructureget, RTC_FORMAT_BIN);
+      /* Get the RTC current Date */
+      HAL_RTC_GetDate(&hrtc, &sdatestructureget, RTC_FORMAT_BIN);
+      /* Display time Format : hh:mm:ss */
+      sprintf((char*)showtime,"%02d:%02d:%02d  ",stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
+      printf("Current Time %s",showtime);
+      printf("Current Time %d",(uint8_t*)showtime);
+      memset(showtime,0,sizeof(showtime));
+      sprintf((char*)showtime,"%02d-%2d-%2d\r\n",sdatestructureget.Month, sdatestructureget.Date, 2000 + sdatestructureget.Year);
+      printf("Current Date %s",showtime);
+      printf("Current Date %d",(uint8_t*)showtime);
 
 }
 
 Assignment 5 Internal WatchDog
 Q12 Write a Interrupt Driven Program(IWDG_A12) to Learn Internal WatchDog Timer and 
 Configure Pins 
-(LED)   PD12 to GPIO_Output // Counter LED						//for STM32F3  PE8 	Counter LED
-(LED)   PD13 to GPIO_Output // Watchdog Refresh					//for STM32F3  PE9 	Watchdog Refresh LED
-(LED)   PD14 to GPIO_Output // System Reset						//for STM32F3  PE10 System ResetLED
+(LED)   PD12 to GPIO_Output // Counter LED                      //for STM32F3  PE8  Counter LED
+(LED)   PD13 to GPIO_Output // Watchdog Refresh                 //for STM32F3  PE9  Watchdog Refresh LED
+(LED)   PD14 to GPIO_Output // System Reset                     //for STM32F3  PE10 System ResetLED
 (Switch)PA0  to GPIO_Input  // Watchdog Refresh Switch
 
 Configure NVIC
@@ -968,19 +968,19 @@ uint32_t counter=0;
 /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0))
-	  	  {
-	  		  HAL_IWDG_Refresh(&hiwdg);
-	  		  HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_13); //WatchDog Refresh LED //for F3 Replace with PE9
-	  	  }
+      if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0))
+          {
+              HAL_IWDG_Refresh(&hiwdg);
+              HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_13); //WatchDog Refresh LED //for F3 Replace with PE9
+          }
  }
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{	// Just for Counting , to show something is running
-	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,RESET);//for F3 Replace with PE10 
-	HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_12);//for F3 Replace with PE8
-	counter++;
+{   // Just for Counting , to show something is running
+    HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,RESET);//for F3 Replace with PE10 
+    HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_12);//for F3 Replace with PE8
+    counter++;
 }
 
 
@@ -990,7 +990,7 @@ Effective Clock for WDG : 32Khz/ Prescalar = 32/64 =0.5 Khz = 2Ms * 4095 = 8190 
 
 for STM32F3
 Watch Dog Freq: 40Khz
-Prescalar : 64			
+Prescalar : 64          
 Effective Clock for WDG : 40Khz/ Prescalar =40/64=0.625 Khz = 1.6 ms * 4095 = 6552 ms ~ 6.5Sec
 If we do not refresh IWDG within 6.5 Sec then it will reset the system
 
@@ -1006,13 +1006,30 @@ No Parity
 115200 Baud Rate
 
 Also configure SWD Feature?
+   ____________________                       _____________________
+  |     STM32F4 Disc   |                     |       PC/Laptop     |
+  |      ______________|                     |                     | 
+  |     | UART4        |     _________       |      Terminal       |
+  |     |              |    |TTL->USB |      | TeraTerm/Minicom    |
+  |     |       RX(PA1)|____|Tx       | USB  |     _____________   |
+  |     |              |    |         |CABLE |    |Hello World  |  |
+  |     |              |    |         |______|    |Hello World  |  |
+  |     |              |    |         |      |    |Hello World  |  |
+  |     |       TX(PA0)|____|Rx       |      |    |...          |  | 
+  |     |___________VCC|____|3v/5v    |      |    |...          |  |
+  |                 GND|____|_________|      |    |_____________|  |
+  |                    |                     |                     |
+  |                    |                     |                     |
+  |                    |                     |                     |
+  |____________________|                     |_____________________|
+                     
 
 /*****************Connection from STM32Board to USB to Serial FTDI Connector FT232R***************/
-STM32F4  STM32F3 			FT232R          
-PA0 		PC10	Tx----------Rx
-PA1 		PC11	Rx----------Tx
-Gnd 		GND		GND---------GND
-Optional		  5V/3V----------5V/3V Based on Jumper Setting
+STM32F4  STM32F3            FT232R          
+PA0         PC10    Tx----------Rx
+PA1         PC11    Rx----------Tx
+Gnd         GND     GND---------GND
+Optional          5V/3V----------5V/3V Based on Jumper Setting
 
 Part 1 Transmit Only
 
@@ -1026,8 +1043,8 @@ char tx[30]= "Hello World\r\n";
 /* USER CODE BEGIN WHILE */
 while (1)
 {
-	  HAL_UART_Transmit(&huart4, (uint8_t *)tx, strlen(tx), 10);
-	  HAL_Delay(500);
+      HAL_UART_Transmit(&huart4, (uint8_t *)tx, strlen(tx), 10);
+      HAL_Delay(500);
     /* USER CODE END WHILE */
 }
 
@@ -1061,15 +1078,15 @@ char rx;
 /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 HAL_UART_Receive_IT(&huart4, (uint8_t *)&rx, 1);
+     HAL_UART_Receive_IT(&huart4, (uint8_t *)&rx, 1);
   }
   
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	 HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-	 rx=rx+1;
-	 HAL_UART_Transmit(&huart4, (uint8_t *)&rx, 1, 10);
+     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+     rx=rx+1;
+     HAL_UART_Transmit(&huart4, (uint8_t *)&rx, 1, 10);
 }
 
 Part 2 Assignment
@@ -1114,13 +1131,13 @@ uint8_t UART1_rxBuffer;
 
  /* USER CODE BEGIN 2 */
 HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
-	  
+      
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	 HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_8);
-	 HAL_UART_Transmit(&huart4,(uint8_t*) &UART1_rxBuffer, 1,10);
-	 HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
+     HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_8);
+     HAL_UART_Transmit(&huart4,(uint8_t*) &UART1_rxBuffer, 1,10);
+     HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
 }
 
 
@@ -1159,32 +1176,32 @@ HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
 
 while(1)
 {
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
-	TxBuf[0]=0x28|ReadFlag|MultiByte;//Read Multi Byte Address of Register for X
-	HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
-	HAL_SPI_Receive(&hspi1, Return, 2, 50);
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
-	
-	Rx_x= (Return[1]<<8)|Return[0]
-	
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
-	TxBuf[0]=0x2A|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Y
-	HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
-	HAL_SPI_Receive(&hspi1, Return, 2, 50);
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
-	
-	Rx_y= (Return[1]<<8)|Return[0]
-	
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
-	TxBuf[0]=0x2C|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Z
-	HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
-	HAL_SPI_Receive(&hspi1, Return, 2, 50);
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
-	
-	Rx_z= (Return[1]<<8)|Return[0]
-	
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+    TxBuf[0]=0x28|ReadFlag|MultiByte;//Read Multi Byte Address of Register for X
+    HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+    HAL_SPI_Receive(&hspi1, Return, 2, 50);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+    
+    Rx_x= (Return[1]<<8)|Return[0]
+    
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+    TxBuf[0]=0x2A|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Y
+    HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+    HAL_SPI_Receive(&hspi1, Return, 2, 50);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+    
+    Rx_y= (Return[1]<<8)|Return[0]
+    
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+    TxBuf[0]=0x2C|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Z
+    HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+    HAL_SPI_Receive(&hspi1, Return, 2, 50);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+    
+    Rx_z= (Return[1]<<8)|Return[0]
+    
 }
-	
+    
 
 
 for Stm32F4
@@ -1263,62 +1280,62 @@ void LED_Display(uint8_t LedStatus);
 
   /* USER CODE BEGIN WHILE */
   #ifdef MASTER_BOARD
-	  while (1)
-	  {
+      while (1)
+      {
 
-		  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
-			  {
-					HAL_Delay(50);//Debouncing Delay
-					if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
-						{
-							if (ubKeyNumber == 0x4)
-								  ubKeyNumber = 0x00;
-							else
-								{
-									LED_Display(++ubKeyNumber);
+          if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+              {
+                    HAL_Delay(50);//Debouncing Delay
+                    if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+                        {
+                            if (ubKeyNumber == 0x4)
+                                  ubKeyNumber = 0x00;
+                            else
+                                {
+                                    LED_Display(++ubKeyNumber);
 
-									/* Set the data to be transmitted */
-									aTxBuffer[0] = ubKeyNumber;
-									aTxBuffer[1] = 0xAA;
+                                    /* Set the data to be transmitted */
+                                    aTxBuffer[0] = ubKeyNumber;
+                                    aTxBuffer[1] = 0xAA;
 
-									/*##-1- Start the transmission process #####################################*/
-									/* While the I2C in reception process, user can transmit data through
-									"aTxBuffer" buffer */
-									/* Timeout is set to 10S */
-									while(HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)I2C_ADDRESS, (uint8_t*)aTxBuffer, 2,10000)!= HAL_OK)
-										{
-											/* Error_Handler() function is called when Timeout error occurs.
-										   When Acknowledge failure occurs (Slave don't acknowledge it's address)
-										   Master restarts communication */
-											if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
-													Error_Handler();
+                                    /*##-1- Start the transmission process #####################################*/
+                                    /* While the I2C in reception process, user can transmit data through
+                                    "aTxBuffer" buffer */
+                                    /* Timeout is set to 10S */
+                                    while(HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)I2C_ADDRESS, (uint8_t*)aTxBuffer, 2,10000)!= HAL_OK)
+                                        {
+                                            /* Error_Handler() function is called when Timeout error occurs.
+                                           When Acknowledge failure occurs (Slave don't acknowledge it's address)
+                                           Master restarts communication */
+                                            if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
+                                                    Error_Handler();
 
-										}
-									HAL_Delay(100);//Delay just for better Tuning
-								}
-							}
-				 }
+                                        }
+                                    HAL_Delay(100);//Delay just for better Tuning
+                                }
+                            }
+                 }
 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  }
+      }
 
   #else
-	  while(1)
-	  {
+      while(1)
+      {
 
-		  /*##-2- Put I2C peripheral in reception process ############################*/
-		    /* Timeout is set to 10S  */
-		    if(HAL_I2C_Slave_Receive(&hi2c1, (uint8_t *)aRxBuffer, 2, 10000) == HAL_OK)
-		    	LED_Display(aRxBuffer[0]);
-		    else
-		    	Error_Handler(); 	/* Transfer error in reception process */
+          /*##-2- Put I2C peripheral in reception process ############################*/
+            /* Timeout is set to 10S  */
+            if(HAL_I2C_Slave_Receive(&hi2c1, (uint8_t *)aRxBuffer, 2, 10000) == HAL_OK)
+                LED_Display(aRxBuffer[0]);
+            else
+                Error_Handler();    /* Transfer error in reception process */
 
 
 
-			//while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY);
-	  }
+            //while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY);
+      }
   #endif /* MASTER_BOARD */
   /* USER CODE END 3 */
 
@@ -1331,28 +1348,28 @@ void LED_Display(uint8_t LedStatus);
 void LED_Display(uint8_t LedStatus)
 {
   /* Turn OFF all LEDs */
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
 
   switch(LedStatus)
   {
     case (1):
       /* Turn ON LED1 */
-		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_SET);
       break;
 
     case (2):
       /* Turn ON LED2 */
-		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
       break;
 
     case (3):
       /* Turn ON LED3 */
-		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_SET);
       break;
 
     case (4):
       /* Turn ON LED4 */
-		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, GPIO_PIN_SET);
       break;
     default:
       break;
@@ -1362,7 +1379,7 @@ void LED_Display(uint8_t LedStatus)
 
 /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, SET);//Turn On Red LED on Slave Error
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, SET);//Turn On Red LED on Slave Error
 
 
 When acting as an I2C master in blocking mode, there are four API functions available for communicating with a slave device:
@@ -1402,29 +1419,29 @@ float xg, yg, zg;
 /* USER CODE BEGIN 0 */
 void adxl_write (uint8_t reg, uint8_t value)
 {
-	uint8_t data[2];
-	data[0] = reg;
-	data[1] = value;
-	HAL_I2C_Master_Transmit (&hi2c1, adxl_address, data, 2, 100);
+    uint8_t data[2];
+    data[0] = reg;
+    data[1] = value;
+    HAL_I2C_Master_Transmit (&hi2c1, adxl_address, data, 2, 100);
 }
 
 void adxl_read_values (uint8_t reg)
 {
-	HAL_I2C_Mem_Read (&hi2c1, adxl_address, reg, 1, (uint8_t *)data_rec, 6, 100);
+    HAL_I2C_Mem_Read (&hi2c1, adxl_address, reg, 1, (uint8_t *)data_rec, 6, 100);
 }
 
 void adxl_read_address (uint8_t reg)
 {
-	HAL_I2C_Mem_Read (&hi2c1, adxl_address, reg, 1, &chipid, 1, 100);
+    HAL_I2C_Mem_Read (&hi2c1, adxl_address, reg, 1, &chipid, 1, 100);
 }
 
 void adxl_init (void)
 {
-	adxl_read_address (0x00); // read the DEVID
+    adxl_read_address (0x00); // read the DEVID
 
-	adxl_write (0x31, 0x01);  // data_format range= +- 4g
-	adxl_write (0x2d, 0x00);  // reset all bits
-	adxl_write (0x2d, 0x08);  // power_cntl measure and wake up 8hz
+    adxl_write (0x31, 0x01);  // data_format range= +- 4g
+    adxl_write (0x2d, 0x00);  // reset all bits
+    adxl_write (0x2d, 0x08);  // power_cntl measure and wake up 8hz
 
 }
 
@@ -1467,22 +1484,22 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-		adxl_read_values (0x32);
-	  x = ((data_rec[1]<<8)|data_rec[0]);
-	  y = ((data_rec[3]<<8)|data_rec[2]);
-	  z = ((data_rec[5]<<8)|data_rec[4]);
+        adxl_read_values (0x32);
+      x = ((data_rec[1]<<8)|data_rec[0]);
+      y = ((data_rec[3]<<8)|data_rec[2]);
+      z = ((data_rec[5]<<8)|data_rec[4]);
 
-	  xg = x * .0078;
-	  yg = y * .0078;
-	  zg = z * .0078;
-	  
-	  
-	  
+      xg = x * .0078;
+      yg = y * .0078;
+      zg = z * .0078;
+      
+      
+      
 How to put a breakpoint at Interrupt:
 Add this in the interrupt code and put a breakpoint on it
-asm("nop");	  
-	  
-	  
+asm("nop");   
+      
+      
 149,96,76
 
 
