@@ -1,0 +1,127 @@
+Download the Wiresharkintro.pcapng for this lab using the link below and try to answer the following questions. 
+Some of the questions are easier to find, some might take some research. 
+The point is to get some hands-on with Wireshark.
+
+Questions for this assignment
+Q1. How many packets were captured in this trace file?
+
+Q2. What protocol does packet number 8 contain? (The highest-layer protocol)
+
+Q3. If you just installed Wireshark for the first time, what is the name of the profile you are using? (bottom right corner)
+
+Q4. Look at packet number one - what is the source IP address in this packet?
+
+Q5. What is the source TCP port in this same packet?
+
+Q6. Which TCP flag is set in this packet?
+
+Q7. What is the frame number of the next packet in this TCP conversation?
+
+Q8. Can you set a filter for this TCP conversation? How many packets do you get?
+
+Q9. Create your Own Profile and Set Layout Pane3 as Packet Diagram?
+
+Q10. Add a coloring rule that will make your tcp FIN packets blue. What filter will you use to do that? 
+
+Q11. Select packet number 1 Can you find the TCP segment length? Add this value as a column.
+
+Common Filters
+IPv4 Address -> ip.addr==10.0.0.1
+IPv4 Source -> ip.src==10.0.0.1
+IPv4 Destination -> ip.dst==10.0.0.1
+IPv4 Range(Subnet) -> ip.addr==10.0.0.0/24
+TCP Port -> tcp.port==80
+TCP SYN -> tcp.flags.syn==1
+
+Capture filters are applied when we are bringing packets, 
+into our capture buffer & Display filters are applied after the that.
+
+Filtering According to Subnet
+192.168.10.20/8 = 192.x.x.x
+192.168.10.20/16= 192.168.x.x
+192.168.10.20/24= 192.168.10.x
+
+
+Operators in Filters
+==   !   ||   &&   >   <
+eq  not  or   and  gt  lt
+
+Example : ip.addr eq 192.168.1.1 && tcp
+
+Spl. Filters
+1. Contains (exact string)
+eg: frame contains admin
+
+2. in{range}
+tcp.port in {80 443 8000..8004}
+
+3. matches(regex)[case insensitive]
+http.host matches "\.(org|com|net)"
+
+Q1. How many ARP packets are in the trace file?
+Q2. How many HTTP packets contain word "Php"? (Regardless of case)
+Q3. Set a filter for TCP port 80. How many packets meet that filter?
+Q4. How many packets are in the top(Bytes Transfer) IP conversation? Set a filter for this conversation.
+[Hint: Statistics->Conversations]
+Q5. How many packets have the SYN Flag bit set?
+Q6. How many TCP Resets (flag) are in the pcap?
+Q7. How many packets coming from the 10.0.2.15 station?
+
+Server Client
+Focus on packet number two of client file and answer the following questions. 
+Q1. What is the destination MAC address? (Use format xx:xx:xx:xx:xx:xx
+
+Q2. What is the source MAC in this packet?
+
+Q3. What is the IP identification number? (Use format xxxxxx with no commas)
+
+Q4. What is the IP Time To Live?
+
+Q5. What is the Source IP?
+
+Q6. Now change pcaps to the server side. Open server-slowfiledownload.pcapng. Which packet corresponds to the packet we were analyzing on the client side? What is the frame number?
+
+Q7. Focus on this frame. What is the source MAC?
+
+Q8. What is the destination MAC?
+
+Q9. What is the IP ID?
+
+Q10. What is the IP TTL?
+
+Q11. How many routers did this packet go through?
+
+Q12. Was there a NAT (Network Address Translation) along the path? Y/N
+
+Fragmentation
+Q1. Ping Google.com and Trace it via wireshark , check for TTL to get no of routers in the path?
+
+Q2. Analyse ping-fragmentation.pcap file see how frame split when size exceeds 1500 bytes?
+
+Q3. Check Flags "More Fragment" in IPv4 and Does IP ID Changes when Frames are Fragmented Note your Observations?
+
+Spoofing/DDoS Attack
+A distributed denial-of-service (DDoS) attack is a malicious attempt to disrupt the normal traffic of a targeted server, 
+service or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic.
+
+Q1. How many unique IP hosts do we see in this pcap?
+
+Q2. How many packets are in the top IP conversation?
+
+Q3. What country is the 62.189.238.32 endpoint communicating from? (Full country name)
+
+Q4. Can you work out how to filter the hosts coming from Turkey? How many packets do you find after filtering for Turkey? (hint: ip.geoip.src_country==?)
+
+Q5. Look at packet 1 - what is the IP TTL for this packet?
+
+Q6. What is the IP Identification number for this packet?
+
+Q7. Look at packet 7, which appears to be coming from the same subnet. What is the IP Identification number?
+
+Q8. Add IP TTL as a column and filter for all packets coming FROM the 212.252.0.0/16 subnet ranges. (Enter OK as the answer)
+
+Q9. Does the IP TTL change for any of these packets? Y/N
+
+Q10. Add the IP ID as a column. Does the IP ID change for any of these packets? Y/N
+
+Q11. Do you think these packets could be spoofed IP's? Y/N
