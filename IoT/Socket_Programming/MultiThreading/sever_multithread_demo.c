@@ -2,10 +2,10 @@
 #include<stdlib.h>
 #include<sys/socket.h>
 #include<string.h>
-#include <arpa/inet.h>
-#include <unistd.h> // for close
+#include<arpa/inet.h>
+#include<unistd.h> // for close
 #include<pthread.h>
-#include <sys/types.h> 
+#include<sys/types.h> 
 
 char client_message[2000];
 char buffer[1024];
