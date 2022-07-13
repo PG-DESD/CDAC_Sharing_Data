@@ -1,3 +1,12 @@
+/*
+In general, when "Bad File Descriptor" is encountered, 
+it means that the socket file descriptor you passed into the API is not valid, 
+which has multiple possible reasons:
+
+1. The sfd/cfd is already closed somewhere.
+2. The sfd/cfd has a wrong value, which is inconsistent with the value obtained from socket() api
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
