@@ -1,4 +1,5 @@
 /*
+Common Mistake :
 In general, when "Bad File Descriptor" is encountered, 
 it means that the socket file descriptor you passed into the API is not valid, 
 which has multiple possible reasons:
