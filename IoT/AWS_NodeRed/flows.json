@@ -1,0 +1,121 @@
+[
+    {
+        "id": "d6bf94a9.83e5b8",
+        "type": "tab",
+        "label": "General_Temp_Hum_AWS_IOT",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f8f83103.35789",
+        "type": "mqtt out",
+        "z": "d6bf94a9.83e5b8",
+        "name": "",
+        "topic": "demo",
+        "qos": "",
+        "retain": "",
+        "broker": "84f0f482.12cf38",
+        "x": 650,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "da5f7108.491d4",
+        "type": "debug",
+        "z": "d6bf94a9.83e5b8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "407bf1de.16fc5",
+        "type": "function",
+        "z": "d6bf94a9.83e5b8",
+        "name": "",
+        "func": "temp = Math.floor ((Math.random() * 55) + 50)\nhumi = Math.floor ((Math.random() * 45) + 35)\n\nmsg.payload = { temperature: temp, humidity: humi, timestamp:  msg.payload, }\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "da5f7108.491d4",
+                "f8f83103.35789"
+            ]
+        ]
+    },
+    {
+        "id": "3aa72f50.37b09",
+        "type": "inject",
+        "z": "d6bf94a9.83e5b8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "407bf1de.16fc5"
+            ]
+        ]
+    },
+    {
+        "id": "84f0f482.12cf38",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "ASW_New",
+        "broker": "a1pkt6llab8sur-ats.iot.us-east-2.amazonaws.com",
+        "port": "8883",
+        "tls": "ba3e7c8f.a8805",
+        "clientid": "",
+        "usetls": true,
+        "verifyservercert": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "ba3e7c8f.a8805",
+        "type": "tls-config",
+        "z": "",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "83de3ad6e5-certificate.pem.crt",
+        "keyname": "83de3ad6e5-private.pem.key",
+        "caname": "AmazonRootCA1.pem",
+        "servername": "",
+        "verifyservercert": true
+    }
+]
