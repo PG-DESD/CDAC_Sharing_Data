@@ -22,7 +22,7 @@ Adafruit_MQTT_Subscribe switch1 = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/
 void setup()
 {
 i = 0;
-Serial.begin(9600);
+Serial.begin(15200);
 
   WiFi.disconnect();
   delay(3000);
