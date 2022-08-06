@@ -68,7 +68,7 @@ void loop()
         if (customswitch == &switch1) {
           Serial.println("Inside Button");
           Serial.println(((char *)switch1.lastread));
-
+			// Add the Code to Turn ON/OFF LED
         }
 
       }
