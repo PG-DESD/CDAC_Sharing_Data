@@ -1,4 +1,5 @@
-
+//Pre-requisite : Install Adafruit Mqtt Library before creating this program
+//Steps: Go To Sketch->Include Library-> Manage Library-> Add Adafruit Mqtt Library
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
 #include <WiFi.h>
