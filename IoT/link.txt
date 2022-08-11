@@ -1,1 +1,6 @@
 https://docs.google.com/document/d/1WXoCcYwr-qFCYjms3FEOAD67cvcwgjG6aC4xfeGhujI/edit?usp=sharing
+
+
+grafana query
+SELECT "time","measure_value::bigint" FROM $__database.$__table WHERE 'humidity' = "measure_name"
+SELECT "time","measure_value::bigint" FROM $__database.$__table WHERE 'temperature' = "measure_name"
