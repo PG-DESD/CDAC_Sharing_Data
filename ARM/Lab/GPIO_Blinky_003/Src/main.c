@@ -72,7 +72,7 @@ int main(void)
 			//This loop executes for 10K times
 			for(uint32_t i=0 ; i < 300000 ; i++ );
 
-			//Tun OFF the LED
+			//Turn OFF the LED
 			*pPortEOutReg &= ~( 1 << 9);
 
 			for(uint32_t i=0 ; i < 300000 ; i++ );
