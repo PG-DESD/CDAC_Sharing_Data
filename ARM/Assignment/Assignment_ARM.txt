@@ -1,0 +1,1026 @@
+Assignment 1 
+
+Q1. Write a Program(GPIO_A1) and Configure Pins PD13/PE8 , PD14/PE9 
+to LED3, LED4 Respectively & Toggle the LED's connected to them , also configure SWD Feature?
+
+Q2. Write a Program(GPIO_A2) and Configure Pins PD12/PE8 to LED1 & 
+Set the LED's connected to the PIN for 500ms and Reset for 500ms , also configure SWD Feature?
+
+Q3. Write a Program(GPIO_A3) and Configure Pins 
+(Switch)PA0  to GPIO_Input ,
+(LED)   PD12/PE8 to GPIO_Output,
+Action:Toggle the LED's when Switch is Pressed , also configure SWD Feature?
+ Part 1
+ /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+      if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+          {
+              
+                      HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+
+          }
+  }
+Part 2
+/* USER CODE BEGIN WHILE */
+  while (1)
+  {
+      if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)//
+          {
+              HAL_Delay(100); //Debouncing Delay used to avoid Noise
+              if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)//
+                  {
+                      HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+
+                  }
+          }
+
+Q4. Write a Interrupt Driven Program(GPIO_A4) and Configure Pins 
+(Switch)PA0  to GPIO_EXTI0 ,
+(LED)   PE8/PD12 to GPIO_Output,
+NVIC GUI --> Enable EXTI line0 Interrupt
+Action:Toggle the LED's when Switch is Pressed , also configure SWD Feature?
+
+Part 1
+
+/* USER CODE BEGIN PV */
+uint8_t flag=0;
+
+/* USER CODE BEGIN WHILE */
+  while (1)
+  {
+      if(1 == flag)
+      {
+          HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+          flag=0;
+      }
+
+
+/* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    flag=1;
+}
+
+Part 2
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+}
+
+Flow
+                            H/W Specific        HAL Specific
+Switch(EXTI0 Source)--> EXTI0_IRQHandler --> HAL_GPIO_EXTI_IRQHandler() --> 
+Actual Funcion where we can Code HAL_GPIO_EXTI_Callback() 
+
+void EXTI0_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI0_IRQn 0 */
+
+  /* USER CODE END EXTI0_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+  /* USER CODE BEGIN EXTI0_IRQn 1 */
+
+  /* USER CODE END EXTI0_IRQn 1 */
+}
+
+void HAL_GPIO_EXTI_IRQHandler(uint16_t GPIO_Pin)
+{
+  /* EXTI line interrupt detected */
+  if(__HAL_GPIO_EXTI_GET_IT(GPIO_Pin) != 0x00u)
+  {
+    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
+    HAL_GPIO_EXTI_Callback(GPIO_Pin);
+  }
+}
+
+__weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(GPIO_Pin);
+
+  /* NOTE: This function should not be modified, when the callback is needed,
+           the HAL_GPIO_EXTI_Callback could be implemented in the user file
+   */
+}
+
+
+Assignment 2 Timer
+Theory:
+Start 0  -- TOP 65535
+250  Lap 1/ Output Compare 1
+500  Lap 2/ Output Compare 2
+750  Lap 3/ Output Compare 3
+1000 Lap 4/ Output Compare 4
+
+*Note:*Timer peripherals are always clocked through APBx timer clocks not APBx peripheral clocks*
+Counting Speed of the Counter Depends on Clock Freq. of Timer
+Timer is Connected to APBx Timer Bus
+16MHZ/8MHZ is the Clock for APB Bus
+Agenda is to genrate a delay for 1MS Tick for the Counter (Incrementing Counter by 1 will take 1ms)
+Counter counting till 1000 @1MS Tick will genrate a Delay of 1Sec
+Running this Delay for 1000 Times(Counting till 1000) for Getting 1Sec
+
+PreScalar=16000
+16MHZ/PreScalar = 1KHZ
+
+Freq.= 1/Time
+1KHZ = 1MS
+1HZ = 1Sec
+
+
+At a Freq. of 1KHZ if we count till 1000 we get 1Sec of Delay
+              1MS          *        1000     =  1Sec
+
+Part 1 For a Delay of 200 MS , if Prescalar is 16000 and APB Bus Freq is 16Mhz, What is the count Required?
+16000000/16000=1000=1Khz = 1MS * 200(count) = 200MS
+Part 2 For a Delay of 500 MS , if Prescalar is 16000 and APB Bus Freq is 16Mhz, What is the count Required?
+16000000/16000=1000=1Khz = 1MS * 500(count) = 500MS
+Part 3 For a Delay of 50 MS , if Prescalar is 16000 and APB Bus Freq is 16Mhz, What is the count Required?
+
+Part 4 For a Delay of 750 MS , if Prescalar is 16000 and APB Bus Freq is 16Mhz, What is the count Required?
+
+If Clock Freq for ABP1 Timer Bus is 32Mhz and we want a delay for 1MS (Tick) , what will be the Prescalar?
+
+If Clock Freq for ABP1 Timer Bus is 32Mhz and Prescalar is 8000 , what will be the Delay or Tick?
+
+32Mhz/8000 = 4 Khz  
+
+F= 1/T
+T=1/F = 1/4Khz=1/4000 = 0.25MS
+
+
+Q5 Write a Interrupt Driven Program(TIM_INT_A5) and 
+Configure Pins 
+(LED)   PD12/PE8 to GPIO_Output
+
+Configure Peripherals TIMER2 (TIM2)
+Clock Source: Internal Clock
+PreScalar : 16000/8000
+Conter Mode: UP
+Counter Period: 1000
+Trigger Event Selection : Update Event 
+
+Configure NVIC
+NVIC GUI --> TIMER2 GLOBAL INTERRUPT Enable
+
+Action:Toggle the LED's when Timer time Elapsed or Timer Expire , also configure SWD Feature?
+
+/* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim2);
+  
+/* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+}
+
+Q6 Write a Program(TIM_PWM_A6) to Learn Pulse Width Modulation and 
+Configure Peripherals TIMER4 (TIM4)                 for STM32F3     Configure Peripherals TIMER1 (TIM1)
+Clock Source: Internal Clock
+PreScalar : 15 +1 [Internally Prescaler + 1]        for STM32F3     PreScalar : 7 +1    
+Conter Mode: UP
+Counter Period: 99+1 [Internally Period + 1]         
+Channel 1: PWM Genration CH1                        for STM32F3     //Channel 1 is connected to PE9 
+Channel 2: PWM Genration CH2                        for STM32F3     //Channel 2 is connected to PE11    
+Channel 3: PWM Genration CH3                        for STM32F3     //Channel 3 is connected to PE13    
+Channel 4: PWM Genration CH4                        for STM32F3     //Channel 4 is connected to PE14    
+
+Action:Control the Brightness of LED , also configure SWD Feature?
+
+*Note:*Timer peripherals are always clocked through APBx timer clocks not APBx peripheral clocks.*
+PWM Frequency = [Timer Frequency ] / [(Prescaler+1)*(Period+1)] 
+If I want 10 kHz, then applying the formula with prescaler one and counter period 99 I have:
+
+PWM Frequency = [2 MHz] / [(1+1)*(99+1)] = 10 kHz
+
+
+PreScalar=15
+16MHZ/PreScalar+1 = 1MHZ
+1MHZ=0.001MS=1MicroSec
+PWM Frequency = [16 Mhz] / [(15+1)*(99+1)] = 10 kHz
+Duty Cycle= Ton/ Ton + Toff
+                
+
+/* USER CODE BEGIN 1 */
+    int dutycycle=99;
+    
+ /* USER CODE BEGIN 2 */
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_1);          for STM32F3     HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_2);          for STM32F3     HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);          for STM32F3     HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_4);          for STM32F3     HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_4);
+  
+/* USER CODE BEGIN WHILE */
+  while (1)
+  {
+      htim4.Instance->CCR1 = dutycycle; // Capture and Compare Register1
+      htim4.Instance->CCR2 = dutycycle; // Capture and Compare Register2
+      htim4.Instance->CCR3 = dutycycle;
+      htim4.Instance->CCR4 = dutycycle;
+      dutycycle -=1;
+      if(dutycycle<1) 
+      dutycycle=99;
+      HAL_Delay(25); // for Proper Fading Affect
+}
+
+Q7.1 Write a Program(TIM_OC_A7_1) to Learn Timer Output Compare and 
+Configure Peripherals TIMER4 (TIM4)
+Clock Source: Internal Clock
+PreScalar : 16000
+Conter Mode: UP
+Counter Period: 1000
+Channel 1: Output Compare CH1
+Channel 2: Output Compare CH2
+Channel 3: Output Compare CH3
+Channel 4: Output Compare CH4
+CH1 Pulse 250, 
+    Mode Toggle
+CH2 Pulse 500, 
+    Mode Toggle
+CH3 Pulse 750, 
+    Mode Toggle
+CH4 Pulse 1000, 
+    Mode Toggle
+
+Action:Control the Motion Sequence of LED , also configure SWD Feature?
+
+ /* USER CODE BEGIN 2 */
+  HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_1);
+  HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_2);
+  HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_3);
+  HAL_TIM_OC_Start(&htim4,TIM_CHANNEL_4);
+
+Q7.2 Write a Program(TIM_OC_A7_2) to Learn Timer Output Compare in Interrupt Mode and 
+Configure Peripherals TIMER4 (TIM4)
+Clock Source: Internal Clock
+PreScalar : 16000
+Conter Mode: UP
+Counter Period: 10000
+Trigger Event Selection: Compare Pulse (OC1)
+Configure NVIC
+NVIC GUI --> TIMER4 GLOBAL INTERRUPT Enable
+
+Channel 1: Output Compare CH1
+Channel 2: Output Compare CH2
+Channel 3: Output Compare CH3
+Channel 4: Output Compare CH4
+CH1 Pulse 250, 
+    Mode Toggle
+CH2 Pulse 500, 
+    Mode Toggle
+CH3 Pulse 750, 
+    Mode Toggle
+CH4 Pulse 1000, 
+    Mode Toggle
+
+Action:Control the Toggoling Fequency of each LED at different rate, also configure SWD Feature?
+/* USER CODE BEGIN PV */
+ volatile uint32_t pulse1_value = 250; //to produce 4Hz
+ volatile uint32_t pulse2_value = 500; //to produce 2HZ
+ volatile uint32_t pulse3_value = 750;  //to produce 1.33Hz
+ volatile uint32_t pulse4_value = 1000;  //to produce 1Hz
+ volatile uint32_t ccr_content;
+
+ /* USER CODE BEGIN 2 */
+  HAL_TIM_OC_Start_IT(&htim4,TIM_CHANNEL_1);
+  HAL_TIM_OC_Start_IT(&htim4,TIM_CHANNEL_2);
+  HAL_TIM_OC_Start_IT(&htim4,TIM_CHANNEL_3);
+  HAL_TIM_OC_Start_IT(&htim4,TIM_CHANNEL_4);
+  
+  /* USER CODE BEGIN 4 */
+void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
+ {
+   /* TIM3_CH1 toggling with frequency = 4 Hz */
+   if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+   {
+       ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+       __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_1,ccr_content+pulse1_value);
+       //to update the compare values at 250,500,750,1000,1250,1500....10000
+   }
+
+   /* TIM3_CH2 toggling with frequency = 2 Hz */
+   if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+   {
+       ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_2);
+       __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_2,ccr_content+pulse2_value);
+        //to update the compare values at 500,1000,1500,2000,2500,3000....10000
+   }
+
+   /* TIM3_CH3 toggling with frequency = 1.33 Hz */
+   if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3)
+   {
+       ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_3);
+       __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_3,ccr_content+pulse3_value);
+        //to update the compare values at 750,1500,2250,3000....10000
+   }
+
+   /* TIM3_CH4 toggling with frequency = 1 Hz */
+   if(htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
+   {
+        ccr_content = HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4);
+       __HAL_TIM_SET_COMPARE(htim,TIM_CHANNEL_4,ccr_content+pulse4_value);
+        //to update the compare values at 1000,2000,3000,4000....10000
+   }
+ }
+
+Q8 Write a Program(TIM_IC_A8) to Learn Timer Input Capture Mode and 
+Configure Peripherals TIMER2 (TIM2)
+Clock Source: Internal Clock
+PreScalar : 16000
+Conter Mode: UP
+Counter Period: 100000
+Channel 1: Input Capture Direct Mode
+Parameter Setting -
+Input Filter : 15 // To Avoid Debouncing 
+
+Configure NVIC
+NVIC GUI --> TIMER2 GLOBAL INTERRUPT Enable
+
+Software Requirement: STM Studio
+
+Action: Capture the Timing of Button Pressed and Display the same in STM STudio, also configure SWD Feature?
+
+/* USER CODE BEGIN PV */
+uint32_t counterVal;
+uint32_t inputCaptureVal;
+
+/* USER CODE BEGIN 2 */
+  HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_1);
+  
+/* USER CODE BEGIN WHILE */
+while (1)
+{
+  counterVal = __HAL_TIM_GetCounter(&htim2);
+}
+
+/* USER CODE BEGIN 4 */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+    if(htim->Instance == TIM2)  //Confirming weather Interrupt Genrated from TIM2 as the ISR is common for All Timers
+    {
+        inputCaptureVal = __HAL_TIM_GetCounter(htim); // Get the Button Press Timing
+    }
+}
+
+Freq:16MHZ
+Aim: 100 Sec
+Prescalar=16000
+16MHZ/PreScalar = 1KHZ
+
+1KHZ= 1MS
+
+1MS * 1000 * 100 = 100Sec
+
+STM Studio 
+How to watch a Real Time Value of Variable?
+Step1: Go To File Menu
+Step2: Click on Import Variables
+Step3: File Selection of Executable File (<project_name>.elf)
+.elf file will be there in Workspace_xxxx-><Project_NameFolder>->Debug Folder
+Step4:Select The variables you want to view (Eg. counterVal,inputCaptureVal) and Press Import Button and Close
+Step5:Varibles will be there in Display Variable Tab
+Step6: Select the Variable -> Right Click and send to VarViewer1
+Step7: Diaplay VarViewer1 as Bar Graph
+
+
+Assignment 3 ADC
+Theory:
+Sucessive Approximation ADC
+Total Conversion Time 
+The elapsed time between the start of a conversion and the end of conversion is the sum of
+the configured sampling time plus the successive approximation time depending on data
+resolution:
+
+For Calculations  Related to STM32F3 Refer Notes.docx
+For Calculations  Related to STM32F4 Refer Pg 420 of MicrocontrollerReference Manual
+
+Total Conversion Time = Sampling Time + 12 Cycles
+
+where Sampling time can range between 3Cycles to 480Cycles
+
+For Example : if Sampling Time =3 Cycles, ADC Freq is 1 Mhz
+
+T conv = 3 + 12 =15 cycles * ADC Freq = 15 * 1 us = 15us
+
+if Sampling Time =480 Cycles, ADC Freq is 2 Mhz
+
+T conv = 480 + 12 =492 cycles * ADC Freq = 492 * 0.5 us = 246us
+
+Calculation for Sampling Time
+APB Clk= 16 MHz
+ADC Prescalar = /8
+ADC CLK = APB Clk/ Prescalar
+ADC CLK = 16/8 =2Mhz
+1MHz= 1Micro Second
+2MHz= 0.5Micro Second
+
+Default Cycles = 3Cycles
+1Cycle = 0.5Micro Second
+3Cycles = 1.5Micro Second 
+
+480Cycles = 0.5 * 480 = 240 Micro Second
+12 Cycles = 0.5 * 12  = 6 Micro Second
+
+Tc = 480 + 12 =492 Cycles
+Tt = 240 + 6  =246 micro second = 0.25 MS
+
+Assuming 8Bit ADC
+Max 255 Full Volt. 3.3v
+mid 127 mid  Volt. 1.65v
+Min 0   GND  Vold. 0.0V
+
+Assuming 10Bit ADC
+Max 1024 Full Volt. 3.3v
+mid 512 mid  Volt. 1.65v
+Min 0   GND  Vold. 0.0V
+
+Q9 Write a Program(ADC_SS_A9) to Learn ADC Single Shot Mode and 
+Configure Peripherals ADC1 
+MODE : IN0 (Connected to PA0 Switch)
+PreScalar : PLCK2 / 8
+Alignment : Right Align
+Data Size/ Resolution : 8Bit
+Continous Conversion : Disabled
+
+Software Requirement: STM Studio
+
+Action : Press the User Switch (PA0) to get Max Value of ADC in Single Shot 
+and Display the same in STM STudio, also configure SWD Feature?
+
+/* USER CODE BEGIN PV */
+uint32_t adcval=0;
+
+/* USER CODE BEGIN 2 */
+HAL_ADC_Start(&hadc1);
+
+  
+/* USER CODE BEGIN WHILE */
+while (1)
+{
+  adcval= HAL_ADC_GetValue(&hadc1);
+}
+
+Q10 Write a Program(ADC_CC_A10) to Learn ADC Continous Conversion Mode and 
+Configure Peripherals ADC1 
+MODE : IN0 (Connected to PA0 Switch)
+PreScalar : PLCK2 / 8
+Alignment : Right Align
+Data Size/ Resolution : 8Bit
+Continous Conversion : Enabled
+Rank->Sampling Time : 480 Cycles
+
+Software Requirement: STM Studio
+
+Action : Press the User Switch (PA0) to get Max Value of ADC in Continous Conversion Mode 
+and Display the same in STM STudio, also configure SWD Feature?
+
+/* USER CODE BEGIN 0 */
+uint32_t adcval=0;
+
+/* USER CODE BEGIN 2 */
+HAL_ADC_Start(&hadc1);
+
+  
+/* USER CODE BEGIN WHILE */
+while (1)
+{
+  adcval= HAL_ADC_GetValue(&hadc1);
+}
+
+Assignment 4 RTC
+
+Q11 Write a Interrupt Driven Program(RTC_INT_A11) to Learn Real Time Clock and 
+Configure Pins 
+(LED)   PD12 to GPIO_Output // Alarm Indication LED
+(LED)   PD13 to GPIO_Output // Second's LED
+Configure NVIC
+NVIC GUI --> RTC alarms A and B interrupt ENABLE
+
+Configure Peripherals RTC 
+Activate Clock Source : Check
+Activate Calender : Check
+Alarm A : Internal Alarm
+
+Calender Time:-
+Hours   : 23
+Minute  : 59
+Second  : 50
+
+Calender Date:-
+Weekday : Thursday
+Month   : January
+Date    : 28
+Year    : 2021
+
+Alarm A:
+Time: 00:00:00
+Alarm Date : 29
+
+Part 2
+Alarm B:
+Time: 00:00:10 
+Alarm Date :29      Turn on  LED14 with Alarm B
+
+/* USER CODE BEGIN WHILE */
+  while (1)
+  {
+      HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13); // Just to show that something is running on the board
+      HAL_Delay(500);
+  }
+
+/* USER CODE BEGIN 4 */
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
+{
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
+}
+
+/* Optional Part to Print Time Stamp on Button Press */
+PreRequisite:
+Set PA0 to EXTI0
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+      char showtime[50];
+      RTC_DateTypeDef sdatestructureget;
+      RTC_TimeTypeDef stimestructureget;
+
+      memset(&sdatestructureget,0,sizeof(sdatestructureget));
+      memset(&stimestructureget,0,sizeof(stimestructureget));
+      /* Get the RTC current Time */
+      HAL_RTC_GetTime(&hrtc, &stimestructureget, RTC_FORMAT_BIN);
+      /* Get the RTC current Date */
+      HAL_RTC_GetDate(&hrtc, &sdatestructureget, RTC_FORMAT_BIN);
+      /* Display time Format : hh:mm:ss */
+      sprintf((char*)showtime,"%02d:%02d:%02d  ",stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
+      printf("Current Time %s",showtime);
+      printf("Current Time %d",(uint8_t*)showtime);
+      memset(showtime,0,sizeof(showtime));
+      sprintf((char*)showtime,"%02d-%2d-%2d\r\n",sdatestructureget.Month, sdatestructureget.Date, 2000 + sdatestructureget.Year);
+      printf("Current Date %s",showtime);
+      printf("Current Date %d",(uint8_t*)showtime);
+
+}
+
+Assignment 5 Internal WatchDog
+Q12 Write a Interrupt Driven Program(IWDG_A12) to Learn Internal WatchDog Timer and 
+Configure Pins 
+(LED)   PD12 to GPIO_Output // Counter LED                      //for STM32F3  PE8  Counter LED
+(LED)   PD13 to GPIO_Output // Watchdog Refresh                 //for STM32F3  PE9  Watchdog Refresh LED
+(LED)   PD14 to GPIO_Output // System Reset                     //for STM32F3  PE10 System ResetLED
+(Switch)PA0  to GPIO_Input  // Watchdog Refresh Switch
+
+Configure NVIC
+NVIC GUI --> TIMER2 GLOBAL INTERRUPT Enable
+50Period * x = 6000ms , x =120
+
+Action: Observe the Counter Variable it will start from 0 to 59 [60 counts], 
+60Count * 100 Period = 6000 ms and 500ms HAL Delay,
+total 6500ms as the IWDG freq. for STM32F3 is set to 40Khz , 
+Pre Scalar is 64, 40/64=0.625 Khz = 1.6 ms * 4095 = 6552 ms ~ 6.5Sec,
+you will observe the watchdog resest the system if unattended 
+(No HAL_IWDG_Refresh) for 6.5 sec
+
+Configure Peripherals TIMER2 (TIM2)
+Clock Source: Internal Clock
+PreScalar : 16000
+Conter Mode: UP
+Counter Period: 100
+Trigger Event Selection : Update Event 
+
+Configure Peripherals IWDG
+Activated: Check
+IWDG Counter Prescalar : 64
+
+/* USER CODE BEGIN PV */
+uint32_t counter=0;
+
+/* USER CODE BEGIN 2 */
+  HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,SET); // For Showing System Reset //for F3 Replace with PE10
+  HAL_Delay(500);
+  HAL_TIM_Base_Start_IT(&htim2);
+  
+  
+/* USER CODE BEGIN WHILE */
+  while (1)
+  {
+      if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0))
+          {
+              HAL_IWDG_Refresh(&hiwdg);
+              HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_13); //WatchDog Refresh LED //for F3 Replace with PE9
+          }
+ }
+
+/* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{   // Just for Counting , to show something is running
+    HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,RESET);//for F3 Replace with PE10 
+    HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_12);//for F3 Replace with PE8
+    counter++;
+}
+
+
+Watch Dog Freq: 32Khz
+Prescalar : 64
+Effective Clock for WDG : 32Khz/ Prescalar = 32/64 =0.5 Khz = 2Ms * 4095 = 8190 ms ~ 8Sec
+
+for STM32F3
+Watch Dog Freq: 40Khz
+Prescalar : 64          
+Effective Clock for WDG : 40Khz/ Prescalar =40/64=0.625 Khz = 1.6 ms * 4095 = 6552 ms ~ 6.5Sec
+If we do not refresh IWDG within 6.5 Sec then it will reset the system
+
+Assignment 6 UART & DMA
+
+Q13 Write a Program(UART_Tx_A13) to Learn Internal UART Transmit Only and 
+
+Configure Peripherals UART (UART4)- Async
+Default Configration
+8 Data Bit
+No Parity
+1 Stop Bit
+115200 Baud Rate
+
+Also configure SWD Feature?
+   ____________________                       _____________________
+  |     STM32F4 Disc   |                     |       PC/Laptop     |
+  |      ______________|                     |                     | 
+  |     | UART4        |     _________       |      Terminal       |
+  |     |              |    |TTL->USB |      | TeraTerm/Minicom    |
+  |     |       RX(PA1)|____|Tx       | USB  |     _____________   |
+  |     |              |    |         |CABLE |    |Hello World  |  |
+  |     |              |    |         |______|    |Hello World  |  |
+  |     |              |    |         |      |    |Hello World  |  |
+  |     |       TX(PA0)|____|Rx       |      |    |...          |  | 
+  |     |___________VCC|____|3v/5v    |      |    |...          |  |
+  |                 GND|____|_________|      |    |_____________|  |
+  |                    |                     |                     |
+  |                    |                     |                     |
+  |                    |                     |                     |
+  |____________________|                     |_____________________|
+                     
+
+/*****************Connection from STM32Board to USB to Serial FTDI Connector FT232R***************/
+STM32F4  STM32F3            FT232R          
+PA0         PC10    Tx----------Rx
+PA1         PC11    Rx----------Tx
+Gnd         GND     GND---------GND
+Optional          5V/3V----------5V/3V Based on Jumper Setting
+
+Part 1 Transmit Only
+
+/* USER CODE BEGIN Includes */
+#include "string.h"
+
+/* USER CODE BEGIN 2 */
+char tx[30]= "Hello World\r\n";
+/* USER CODE END 2 */
+
+/* USER CODE BEGIN WHILE */
+while (1)
+{
+      HAL_UART_Transmit(&huart4, (uint8_t *)tx, strlen(tx), 10);
+      HAL_Delay(500);
+    /* USER CODE END WHILE */
+}
+
+PART 2 Transmit and Receive Both
+
+HAL_UART_Receive(&huart4, (uint8_t *)tx,1, 10);
+HAL_Delay(50);
+HAL_UART_Transmit(&huart4, (uint8_t *)tx,1, 10);
+bzero(tx,1);
+
+Q14 Write a Interrupt Driven Program(UART_Echo_A14) to Learn UART RX TX Functionality and 
+Configure Pins 
+(LED)   PD12 to GPIO_Output // Interrupt Confirmation LED
+
+Configure NVIC
+NVIC GUI --> UART4 GLOBAL INTERRUPT Enable
+
+Configure Peripherals UART (UART4)
+Default Configration
+8 Data Bit
+No Parity
+1 Stop Bit
+115200 Baud Rate
+
+Also configure SWD Feature?
+
+Interrupt
+/* USER CODE BEGIN PV */
+char rx;
+
+/* USER CODE BEGIN WHILE */
+  while (1)
+  {
+     HAL_UART_Receive_IT(&huart4, (uint8_t *)&rx, 1);
+  }
+  
+/* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+     rx=rx+1;
+     HAL_UART_Transmit(&huart4, (uint8_t *)&rx, 1, 10);
+}
+
+Part 2 Assignment
+
+Transmit Entire String when user press Enter Key
+
+Example
+
+Input : Hello <Enter Key >
+
+Output : Hello 
+
+Output should only be displayed when user press enter key after typing some text
+
+Hits:
+Use Array, Increment Index
+For Enter Key Press Event compare buf with '\r'
+
+Q15 Write a Direct Memory Access (DMA) Driven Program(UART_DMA_A15) to Learn UART Functionality via DMA and 
+Configure Pins 
+(LED)   PD12 to GPIO_Output // Interrupt Confirmation LED
+
+Configure Peripherals UART (UART4)
+Mode : Async
+Default Configration :No Change Req. for below parameters
+8 Data Bit
+No Parity
+1 Stop Bit
+115200 Baud Rate
+
+DMA Settings:
+Press Add Button and Select- UART4_RX
+Direction : Peripheral to Memory
+DMA Request Setting:
+Mode : Normal
+
+Also configure SWD Feature?
+
+
+/* USER CODE BEGIN PV */
+uint8_t UART1_rxBuffer;
+
+ /* USER CODE BEGIN 2 */
+HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
+      
+/* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+     HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_8);
+     HAL_UART_Transmit(&huart4,(uint8_t*) &UART1_rxBuffer, 1,10);
+     HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
+}
+
+
+SPI
+8 Bit Register
+RW
+7 6 5 4 3 2 1 0
+1 0 0 0 0 0 0 0  Read (0x80) | CMD
+0 0 0 0 0 0 0 0  Write(0x00) | CMD
+
+for Stm32F3
+//PV
+uint8_t ReadFlag=0x80;
+uint8_t MultiByte=0x40;
+uint8_t Return[2];
+uint16_t Rx_x,Rx_y,Rx_z;
+
+//Who am I Checking
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+TxBuf[0]=0x0f|ReadFlag;//Read Address of Register
+HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+HAL_SPI_Receive(&hspi1, Return, 1, 50);
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+//Configure Control Register 1 with Address 0x20
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+TxBuf[0]=0x20;//Address of Register
+TxBuf[1]=0x3F;//Data for Register
+HAL_SPI_Transmit(&hspi1, TxBuf, 2, 50);
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+//Configure Control Register 4 with Address 0x23
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+TxBuf[0]=0x23;//Address of Register
+TxBuf[1]=0x10;//Data for Register
+HAL_SPI_Transmit(&hspi1, TxBuf, 2, 50);
+HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+
+while(1)
+{
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+    TxBuf[0]=0x28|ReadFlag|MultiByte;//Read Multi Byte Address of Register for X
+    HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+    HAL_SPI_Receive(&hspi1, Return, 2, 50);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+    
+    Rx_x= (Return[1]<<8)|Return[0]
+    
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+    TxBuf[0]=0x2A|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Y
+    HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+    HAL_SPI_Receive(&hspi1, Return, 2, 50);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+    
+    Rx_y= (Return[1]<<8)|Return[0]
+    
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
+    TxBuf[0]=0x2C|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Z
+    HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);
+    HAL_SPI_Receive(&hspi1, Return, 2, 50);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
+    
+    Rx_z= (Return[1]<<8)|Return[0]
+    
+}
+    
+
+
+for Stm32F4
+0x20 Control Register4
+0x37 Value to be set in Control Register (for enabling XYZ Axis, Setting Feqn. 12.5Hz)
+
+Reading Control Resgister
+Read   Ctrl_Reg
+0x80 | 0x20
+
+0x23 Control Register3
+0xC8 Value to be set in Control Register3 (1: data ready signal connected to INT1, 1: interrupt signals active HIGH, 1: INT1/DRDY signal enabled)
+
+0x80 | 0x29 Read X Axis Data
+
+0x80 | 0x2B Read Y Axis Data
+
+0x80 | 0x2D Read Z Axis Data
+
+Make 3 Global variables and observe value in STM Studio
+Rx_X
+Rx_Y
+Rx_Z
+
+Assignment I2C
+How to handle I2C data buffer transmission/reception between two boards, 
+in polling mode.
+
+   _________________________                        _________________________
+  |           ______________|                      |______________           |
+  |          | I2C1         |                      |          I2C1|          |
+  |          |              |                      |              |          |
+  |          |      SCL(PB6)|______________________|(PB6)SCL      |          |
+  |          |              |                      |              |          |
+  |          |              |                      |              |          |
+  |          |              |                      |              |          |
+  |          |      SDA(PB9)|______________________|(PB9)SDA      |          |
+  |          |              |                      |              |          |
+  |          |______________|                      |______________|          |
+  |      __                 |                      |      __                 |
+  |     |__|                |                      |     |__|                |
+  |     USER                |                      |     USER                |
+  |                      GND|______________________|GND                      |
+  |_STM32F4 ________________|                      |_________________STM32F4_|
+
+Q17. Write a I2C Program to Communicate between Two STM32F4 Boards and Send LED_ON Info?
+Configure Pins 
+(LED)   PD12 to GPIO_Output 
+(LED)   PD13 to GPIO_Output 
+(LED)   PD14 to GPIO_Output 
+(LED)   PD15 to GPIO_Output 
+(Button)PA0  to GPIO_Input
+SDA(PB9)
+SCL(PB6)
+Configure Peripherals I2C (I2C1)
+Mode : I2C
+Master Feature 
+I2C Speed Mode : Fast Mode
+I2C Clock : 400000 (400Khz)
+FastMode DutyCycle : Tlow/Thigh =16/9
+Slave Feature
+Primary Address Length: 10bit
+Primary Slave Address: 0x1D
+
+/* USER CODE BEGIN PD */
+#define MASTER_BOARD
+#define I2C_ADDRESS        0x1D
+
+/* USER CODE BEGIN PV */
+ uint8_t ubKeyNumber = 0x0;
+ uint8_t aTxBuffer[2];
+ uint8_t aRxBuffer[2];
+ 
+ /* USER CODE BEGIN PFP */
+void LED_Display(uint8_t LedStatus);
+
+  /* USER CODE BEGIN WHILE */
+  #ifdef MASTER_BOARD
+      while (1)
+      {
+
+          if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+              {
+                    HAL_Delay(50);//Debouncing Delay
+                    if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET)
+                        {
+                            if (ubKeyNumber == 0x4)
+                                  ubKeyNumber = 0x00;
+                            else
+                                {
+                                    LED_Display(++ubKeyNumber);
+
+                                    /* Set the data to be transmitted */
+                                    aTxBuffer[0] = ubKeyNumber;
+                                    aTxBuffer[1] = 0xAA;
+
+                                    /*##-1- Start the transmission process #####################################*/
+                                    /* While the I2C in reception process, user can transmit data through
+                                    "aTxBuffer" buffer */
+                                    /* Timeout is set to 10S */
+                                    while(HAL_I2C_Master_Transmit(&hi2c1, (uint16_t)I2C_ADDRESS, (uint8_t*)aTxBuffer, 2,10000)!= HAL_OK)
+                                        {
+                                            /* Error_Handler() function is called when Timeout error occurs.
+                                           When Acknowledge failure occurs (Slave don't acknowledge it's address)
+                                           Master restarts communication */
+                                            if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
+                                                    Error_Handler();
+
+                                        }
+                                    HAL_Delay(100);//Delay just for better Tuning
+                                }
+                            }
+                 }
+
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+      }
+
+  #else
+      while(1)
+      {
+
+          /*##-2- Put I2C peripheral in reception process ############################*/
+            /* Timeout is set to 10S  */
+            if(HAL_I2C_Slave_Receive(&hi2c1, (uint8_t *)aRxBuffer, 2, 10000) == HAL_OK)
+                LED_Display(aRxBuffer[0]);
+            else
+                Error_Handler();    /* Transfer error in reception process */
+
+
+
+            //while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY);
+      }
+  #endif /* MASTER_BOARD */
+  /* USER CODE END 3 */
+
+/* USER CODE BEGIN 4 */
+/**
+  * @brief  Turns ON/OFF the dedicated LED.
+  * @param  LedStatus: LED number from 0 to 3
+  * @retval None
+  */
+void LED_Display(uint8_t LedStatus)
+{
+  /* Turn OFF all LEDs */
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
+
+  switch(LedStatus)
+  {
+    case (1):
+      /* Turn ON LED1 */
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_SET);
+      break;
+
+    case (2):
+      /* Turn ON LED2 */
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
+      break;
+
+    case (3):
+      /* Turn ON LED3 */
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, GPIO_PIN_SET);
+      break;
+
+    case (4):
+      /* Turn ON LED4 */
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, GPIO_PIN_SET);
+      break;
+    default:
+      break;
+  }
+}
+/* USER CODE END 4 */
+
+/* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, SET);//Turn On Red LED on Slave Error
+
+
+When acting as an I2C master in blocking mode, there are four API functions available for communicating with a slave device:
+
+HAL_I2C_Master_Transmit()
+HAL_I2C_Master_Receive()
+HAL_I2C_Mem_Write()
+HAL_I2C_Mem_Read()
