@@ -25,7 +25,7 @@
 #include<stdio.h>
 #include<stdint.h>
 
-int flag=0;
+volatile int flag=0;
 uint32_t  volatile *const pClkCtrlReg =   (uint32_t*)0x40023830;
 uint32_t  volatile *const pPortDModeReg = (uint32_t*)0x40020C00;
 uint32_t  volatile *const pPortDOutReg =  (uint32_t*)0x40020C14;
