@@ -189,7 +189,14 @@ Channel 4: PWM Genration CH4                        for STM32F3     //Channel 4 
 Action:Control the Brightness of LED , also configure SWD Feature?
 
 *Note:*Timer peripherals are always clocked through APBx timer clocks not APBx peripheral clocks.*
-PWM Frequency = [Timer Frequency ] / [(Prescaler+1)*(Period+1)] 
+Most Important Formula
+For STM32:
+PWM Frequency = [Timer Frequency ] / [(Prescaler+1)*(Period+1)]
+For Theory:
+PWM Frequency = [Timer Frequency ] / [(Prescaler)*(Period)]
+PWM Time = 1 / PWM Frequency
+Duty Cycle= Ton/ Ton + Toff
+
 If I want 10 kHz, then applying the formula with prescaler one and counter period 99 I have:
 
 PWM Frequency = [2 MHz] / [(1+1)*(99+1)] = 10 kHz
