@@ -111,6 +111,13 @@ int main(void)
 	HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);	//ensure proper priority grouping for freeRTOS
 
 	//create a mutex - note this is just a special case of a binary semaphore
+	/*mutexes are simply binary semaphores with one (very important) difference: priority inheritance. In the previous example, we saw the highest-priority task waiting on two lower-priority tasks to complete, which caused a priority inversion. Mutexes address this issue with something called priority inheritance.
+	When a higher-priority task attempts to take a mutex and is blocked, the scheduler will elevate the priority of the task that holds the mutex to the same level as the blocked task. This guarantees that the high-priority task will acquire the mutex and run as soon as possible.
+	
+	There are only two significant differences in this example:
+	1. We'll use xSemaphoreCreateMutex() instead of xSemaphoreCreateBinarySemaphore().
+	2. No initial xSemaphoreGive() call is required since the mutex will be initialized with a value of 1. Mutexes are designed to be taken only when needed and then given back.
+	*/
 	mutexPtr = xSemaphoreCreateMutex();
 	assert_param(mutexPtr != NULL);
 
