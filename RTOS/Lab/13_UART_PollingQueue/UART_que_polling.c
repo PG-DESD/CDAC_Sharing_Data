@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : mainUART_Queue_Poling.c
+  * @file           : main.c
   * @brief          : Main program body
   ******************************************************************************
   * @attention
@@ -117,8 +117,9 @@ int main(void)
   HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);	//ensure proper priority grouping for freeRTOS
 
   //setup tasks, making sure they have been properly created before moving on
-  assert_param(xTaskCreate(polledUartReceive, "polledUartRx", STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL) == pdPASS);
   assert_param(xTaskCreate(uartPrintOutTask, "uartPrintTask", STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, NULL) == pdPASS);
+  assert_param(xTaskCreate(polledUartReceive, "polledUartRx", STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL) == pdPASS);
+
 
   uart2_BytesReceived = xQueueCreate(10, sizeof(char));
 
@@ -257,8 +258,9 @@ void uartPrintOutTask( void* NotUsed)
 
 	while(1)
 	{
+		SEGGER_SYSVIEW_PrintfHost("Waiting for mque receive\n");
 		xQueueReceive(uart2_BytesReceived, &nextByte, portMAX_DELAY);
-		SEGGER_SYSVIEW_PrintfHost("%c", nextByte);
+		SEGGER_SYSVIEW_PrintfHost("Received data: %c", nextByte);
 	}
 }
 
@@ -274,8 +276,12 @@ void polledUartReceive( void* NotUsed )
 	//MX_UART4_Init();
 	while(1)
 	{
-		HAL_UART_Receive (&huart4, nextByte, 1, 10);  // receive 4 bytes of data
-		xQueueSend(uart2_BytesReceived, &nextByte, 0);
+		SEGGER_SYSVIEW_PrintfHost("Before HAL UART\n");
+		if( (HAL_UART_Receive (&huart4,(uint8_t *) &nextByte, 1, 10) ) == HAL_OK)  // receive 4 bytes of data
+			{
+				SEGGER_SYSVIEW_PrintfHost("%c", nextByte);
+				xQueueSend(uart2_BytesReceived, &nextByte, 0);
+			}
 	}
 }
 
@@ -336,3 +342,4 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+
