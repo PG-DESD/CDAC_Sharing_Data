@@ -44,7 +44,7 @@ int main(void)
 				*pPortEOutReg |= ( 1 << 9);
 			}else{
 				//turn off the LED
-				*pPortEOutReg &= ~( 1 << 9);
+				*pPortEOutReg &= ~(1 << 9);
 			}
 
 		}
