@@ -24,7 +24,11 @@
 
 #include<stdio.h>
 #include<stdint.h>
-
+/**
+Make Compiler Optmization to -O3 
+1. Right click on Project->Properties->Expand c/c++->Mcu/mpu gcc compiler->Optimization->Change optimization level in dropdown menu to -O3)
+2. Remove Volatile Keyword from Flag Variable
+*/
 volatile int flag=0;
 uint32_t  volatile *const pClkCtrlReg =   (uint32_t*)0x40023830;
 uint32_t  volatile *const pPortDModeReg = (uint32_t*)0x40020C00;
