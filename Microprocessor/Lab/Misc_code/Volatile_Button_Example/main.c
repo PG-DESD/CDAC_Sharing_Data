@@ -6,6 +6,11 @@
   * @brief   Default main function.
   ******************************************************************************
 */
+/**
+Make Compiler Optmization to -O3 
+1. Right click on Project->Properties->Expand c/c++->Mcu/mpu gcc compiler->Optimization->Change optimization level in dropdown menu to -O3)
+2. Remove Volatile Keyword
+*/
 
 #include<stdint.h>
 
