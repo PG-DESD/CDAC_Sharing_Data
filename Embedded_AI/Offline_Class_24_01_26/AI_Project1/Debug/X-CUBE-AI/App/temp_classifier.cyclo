@@ -1,0 +1,13 @@
+../X-CUBE-AI/App/temp_classifier.c:362:9:temp_classifier_configure_activations	2
+../X-CUBE-AI/App/temp_classifier.c:395:9:temp_classifier_configure_weights	2
+../X-CUBE-AI/App/temp_classifier.c:434:9:ai_temp_classifier_get_info	4
+../X-CUBE-AI/App/temp_classifier.c:481:9:ai_temp_classifier_get_report	4
+../X-CUBE-AI/App/temp_classifier.c:528:10:ai_temp_classifier_get_error	1
+../X-CUBE-AI/App/temp_classifier.c:535:10:ai_temp_classifier_create	1
+../X-CUBE-AI/App/temp_classifier.c:546:10:ai_temp_classifier_create_and_init	8
+../X-CUBE-AI/App/temp_classifier.c:581:12:ai_temp_classifier_inputs_get	2
+../X-CUBE-AI/App/temp_classifier.c:592:12:ai_temp_classifier_outputs_get	2
+../X-CUBE-AI/App/temp_classifier.c:603:11:ai_temp_classifier_destroy	1
+../X-CUBE-AI/App/temp_classifier.c:610:9:ai_temp_classifier_init	2
+../X-CUBE-AI/App/temp_classifier.c:627:8:ai_temp_classifier_run	1
+../X-CUBE-AI/App/temp_classifier.c:635:8:ai_temp_classifier_forward	1

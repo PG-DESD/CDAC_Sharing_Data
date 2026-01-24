@@ -1,0 +1,193 @@
+ST Edge AI Core v2.2.0-20266 2adc00962
+Created date          : 2026-01-23 22:32:51
+Parameters            : generate --target stm32f4 --name temp_classifier -m C:/Users/z665059/OneDrive - ZF Friedrichshafen AG/Documents/my_project_temperature_classification/notebooks/dht22_temp_classifier.tflite --compression none --verbosity 1 --workspace C:/Users/z665059/AppData/Local/Temp/mxAI_workspace126937851813001245701502233647660 --output C:/Users/z665059/.stm32cubemx/temp_classifier_output
+
+Exec/report summary (generate)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+model file         :   C:\Users\z665059\OneDrive - ZF Friedrichshafen AG\Documents\my_project_temperature_classification\notebooks\dht22_temp_classifier.tflite   
+type               :   tflite                                                                                                                                     
+c_name             :   temp_classifier                                                                                                                            
+compression        :   none                                                                                                                                       
+options            :   allocate-inputs, allocate-outputs                                                                                                          
+optimization       :   balanced                                                                                                                                   
+target/series      :   stm32f4                                                                                                                                    
+workspace dir      :   C:\Users\z665059\AppData\Local\Temp\mxAI_workspace126937851813001245701502233647660                                                        
+output dir         :   C:\Users\z665059\.stm32cubemx\temp_classifier_output                                                                                       
+model_fmt          :   float                                                                                                                                      
+model_name         :   dht22_temp_classifier                                                                                                                      
+model_hash         :   0x4fe47a5ce67cf5755111f40068b2d60f                                                                                                         
+params #           :   195 items (780 B)                                                                                                                          
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+input 1/1          :   'serving_default_keras_tensor0', f32(1x1), 4 Bytes, activations                                                                            
+output 1/1         :   'nl_3', f32(1x3), 12 Bytes, activations                                                                                                    
+macc               :   264                                                                                                                                        
+weights (ro)       :   780 B (780 B) (1 segment)                                                                                                                  
+activations (rw)   :   96 B (96 B) (1 segment) *                                                                                                                  
+ram (total)        :   96 B (96 B) = 96 + 0 + 0                                                                                                                   
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+(*) 'input'/'output' buffers are allocated in the activations buffer
+
+Model name - dht22_temp_classifier
+------ ------------------------------------------------ ------------ ------------ ------ -------------------------------- --- --------------- --------------- ---------------------------- 
+m_id   layer (type,original)                            oshape       param/size     macc                     connected to   | c_size          c_macc          c_type                       
+------ ------------------------------------------------ ------------ ------------ ------ -------------------------------- --- --------------- --------------- ---------------------------- 
+0      serving_default_keras_tensor0 (Input, )          [b:1,c:1]                                                           | +128(+100.0%)   +48(+100.0%)    Dense_/Nonlinearity_[0, 1]   
+       sequential_1_dense_1_MatMul (Placeholder, )      [b:16,c:1]   16/64                                                  | -64(-100.0%)                    
+       sequential_1_dense.._1_BiasAdd (Placeholder, )   [b:16]       16/64                                                  | -64(-100.0%)                    
+       gemm_0 (Gemm, FULLY_CONNECTED)                   [b:1,c:16]                    32    serving_default_keras_tensor0   |                 -32(-100.0%)    
+                                                                                              sequential_1_dense_1_MatMul   | 
+                                                                                           sequential_1_dense.._1_BiasAdd   | 
+       nl_0_nl (Nonlinearity, FULLY_CONNECTED)          [b:1,c:16]                    16                           gemm_0   |                 -16(-100.0%)    
+------ ------------------------------------------------ ------------ ------------ ------ -------------------------------- --- --------------- --------------- ---------------------------- 
+1      arith_constant3 (Placeholder, )                  [b:8,c:16]   128/512                                                | +32(+6.2%)      +144(+100.0%)   Dense_/Nonlinearity_[2, 3]   
+       arith_constant (Placeholder, )                   [b:8]        8/32                                                   | -32(-100.0%)                    
+       gemm_1 (Gemm, FULLY_CONNECTED)                   [b:1,c:8]                    136                          nl_0_nl   |                 -136(-100.0%)   
+                                                                                                          arith_constant3   | 
+                                                                                                           arith_constant   | 
+       nl_1_nl (Nonlinearity, FULLY_CONNECTED)          [b:1,c:8]                      8                           gemm_1   |                 -8(-100.0%)     
+------ ------------------------------------------------ ------------ ------------ ------ -------------------------------- --- --------------- --------------- ---------------------------- 
+2      arith_constant2 (Placeholder, )                  [b:3,c:8]    24/96                                                  | +12(+12.5%)     +27(+100.0%)    Dense_[4]                    
+       arith_constant1 (Placeholder, )                  [b:3]        3/12                                                   | -12(-100.0%)                    
+       gemm_2 (Gemm, FULLY_CONNECTED)                   [b:1,c:3]                     27                          nl_1_nl   |                 -27(-100.0%)    
+                                                                                                          arith_constant2   | 
+                                                                                                          arith_constant1   | 
+------ ------------------------------------------------ ------------ ------------ ------ -------------------------------- --- --------------- --------------- ---------------------------- 
+3      nl_3 (Nonlinearity, SOFTMAX)                     [b:1,c:3]                     45                           gemm_2   |                                 Nonlinearity_[o][5]          
+------ ------------------------------------------------ ------------ ------------ ------ -------------------------------- --- --------------- --------------- ---------------------------- 
+model/c-model: macc=264/264  weights=780/780  activations=--/96 io=--/0
+
+
+
+Generated C-graph summary
+------------------------------------------------------------------------------------------------------------------------
+model name            : dht22_temp_classifier
+c-name                : temp_classifier
+c-node #              : 6
+c-array #             : 13
+activations size      : 96 (1 segment)
+weights size          : 780 (1 segment)
+macc                  : 264
+inputs                : ['serving_default_keras_tensor0_output']
+outputs               : ['nl_3_output']
+
+C-Arrays (13)
+------ -------------------------------------- ----------- ------------------------- ------------- --------- 
+c_id   name (*_array)                         item/size   domain/mem-pool           c-type        comment   
+------ -------------------------------------- ----------- ------------------------- ------------- --------- 
+0      gemm_0_bias                            16/64       weights/weights           const float             
+1      gemm_0_output                          16/64       activations/**default**   float                   
+2      gemm_0_weights                         16/64       weights/weights           const float             
+3      gemm_1_bias                            8/32        weights/weights           const float             
+4      gemm_1_output                          8/32        activations/**default**   float                   
+5      gemm_1_weights                         128/512     weights/weights           const float             
+6      gemm_2_bias                            3/12        weights/weights           const float             
+7      gemm_2_output                          3/12        activations/**default**   float                   
+8      gemm_2_weights                         24/96       weights/weights           const float             
+9      nl_0_nl_output                         16/64       activations/**default**   float                   
+10     nl_1_nl_output                         8/32        activations/**default**   float                   
+11     nl_3_output                            3/12        activations/**default**   float         /output   
+12     serving_default_keras_tensor0_output   1/4         activations/**default**   float         /input    
+------ -------------------------------------- ----------- ------------------------- ------------- --------- 
+
+C-Layers (6)
+------ ---------------- ---- --------------- ------ ----- ----------------------------------------- ------------------ 
+c_id   name (*_layer)   id   layer_type      macc   rom   tensors                                   shape (array id)   
+------ ---------------- ---- --------------- ------ ----- ----------------------------------------- ------------------ 
+0      gemm_0           0    Dense           32     128   I: serving_default_keras_tensor0_output   f32(1x1) (12)      
+                                                          W: gemm_0_weights                         f32(16x1) (2)      
+                                                          W: gemm_0_bias                            f32(16) (0)        
+                                                          O: gemm_0_output                          f32(1x16) (1)      
+------ ---------------- ---- --------------- ------ ----- ----------------------------------------- ------------------ 
+1      nl_0_nl          0    Nonlinearity    16     0     I: gemm_0_output                          f32(1x16) (1)      
+                                                          O: nl_0_nl_output                         f32(1x16) (9)      
+------ ---------------- ---- --------------- ------ ----- ----------------------------------------- ------------------ 
+2      gemm_1           1    Dense           136    544   I: nl_0_nl_output                         f32(1x16) (9)      
+                                                          W: gemm_1_weights                         f32(8x16) (5)      
+                                                          W: gemm_1_bias                            f32(8) (3)         
+                                                          O: gemm_1_output                          f32(1x8) (4)       
+------ ---------------- ---- --------------- ------ ----- ----------------------------------------- ------------------ 
+3      nl_1_nl          1    Nonlinearity    8      0     I: gemm_1_output                          f32(1x8) (4)       
+                                                          O: nl_1_nl_output                         f32(1x8) (10)      
+------ ---------------- ---- --------------- ------ ----- ----------------------------------------- ------------------ 
+4      gemm_2           2    Dense           27     108   I: nl_1_nl_output                         f32(1x8) (10)      
+                                                          W: gemm_2_weights                         f32(3x8) (8)       
+                                                          W: gemm_2_bias                            f32(3) (6)         
+                                                          O: gemm_2_output                          f32(1x3) (7)       
+------ ---------------- ---- --------------- ------ ----- ----------------------------------------- ------------------ 
+5      nl_3             3    Nonlinearity    45     0     I: gemm_2_output                          f32(1x3) (7)       
+                                                          O: nl_3_output                            f32(1x3) (11)      
+------ ---------------- ---- --------------- ------ ----- ----------------------------------------- ------------------ 
+
+
+
+Number of operations per c-layer
+------- ------ ------------------------ ----- -------------- 
+c_id    m_id   name (type)                #op           type 
+------- ------ ------------------------ ----- -------------- 
+0       0      gemm_0 (Dense)              32   smul_f32_f32 
+1       0      nl_0_nl (Nonlinearity)      16     op_f32_f32 
+2       1      gemm_1 (Dense)             136   smul_f32_f32 
+3       1      nl_1_nl (Nonlinearity)       8     op_f32_f32 
+4       2      gemm_2 (Dense)              27   smul_f32_f32 
+5       3      nl_3 (Nonlinearity)         45     op_f32_f32 
+------- ------ ------------------------ ----- -------------- 
+total                                     264 
+
+Number of operation types
+---------------- ----- ----------- 
+operation type       #           % 
+---------------- ----- ----------- 
+smul_f32_f32       195       73.9% 
+op_f32_f32          69       26.1% 
+
+Complexity report (model)
+------ ------------------------------- ------------------------- ------------------------- -------- 
+m_id   name                            c_macc                    c_rom                     c_id     
+------ ------------------------------- ------------------------- ------------------------- -------- 
+0      serving_default_keras_tensor0   ||||||            18.2%   ||||              16.4%   [0, 1]   
+1      arith_constant3                 ||||||||||||||||  54.5%   ||||||||||||||||  69.7%   [2, 3]   
+2      arith_constant2                 |||               10.2%   |||               13.8%   [4]      
+3      nl_3                            |||||             17.0%   |                  0.0%   [5]      
+------ ------------------------------- ------------------------- ------------------------- -------- 
+macc=264 weights=780 act=96 ram_io=0
+ 
+ Requested memory size by section - "stm32f4" target
+ ------------------------------ ------- -------- ------- ----- 
+ module                            text   rodata    data   bss 
+ ------------------------------ ------- -------- ------- ----- 
+ NetworkRuntime1020_CM4_GCC.a     6,924        0       0     0 
+ temp_classifier.o                  540       48   1,752   148 
+ temp_classifier_data.o              48       16      88     0 
+ lib (toolchain)*                   614       24       0     0 
+ ------------------------------ ------- -------- ------- ----- 
+ RT total**                       8,126       88   1,840   148 
+ ------------------------------ ------- -------- ------- ----- 
+ weights                              0      784       0     0 
+ activations                          0        0       0    96 
+ io                                   0        0       0     0 
+ ------------------------------ ------- -------- ------- ----- 
+ TOTAL                            8,126      872   1,840   244 
+ ------------------------------ ------- -------- ------- ----- 
+ *  toolchain objects (libm/libgcc*)
+ ** RT AI runtime objects (kernels+infrastructure)
+  
+  Summary - "stm32f4" target
+  ---------------------------------------------------
+               FLASH (ro)      %*   RAM (rw)       % 
+  ---------------------------------------------------
+  RT total         10,054   92.8%      1,988   95.4% 
+  ---------------------------------------------------
+  TOTAL            10,838              2,084         
+  ---------------------------------------------------
+  *  rt/total
+
+
+Generated files (7)
+------------------------------------------------------------------------------------ 
+C:\Users\z665059\.stm32cubemx\temp_classifier_output\temp_classifier_data_params.h   
+C:\Users\z665059\.stm32cubemx\temp_classifier_output\temp_classifier_data_params.c   
+C:\Users\z665059\.stm32cubemx\temp_classifier_output\temp_classifier_data.h          
+C:\Users\z665059\.stm32cubemx\temp_classifier_output\temp_classifier_data.c          
+C:\Users\z665059\.stm32cubemx\temp_classifier_output\temp_classifier_config.h        
+C:\Users\z665059\.stm32cubemx\temp_classifier_output\temp_classifier.h               
+C:\Users\z665059\.stm32cubemx\temp_classifier_output\temp_classifier.c               

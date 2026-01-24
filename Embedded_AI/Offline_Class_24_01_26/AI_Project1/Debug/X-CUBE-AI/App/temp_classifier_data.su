@@ -1,0 +1,4 @@
+../X-CUBE-AI/App/temp_classifier_data.c:42:11:ai_temp_classifier_data_activations_buffer_get	72	static
+../X-CUBE-AI/App/temp_classifier_data.c:60:11:ai_temp_classifier_data_weights_buffer_get	72	static
+../X-CUBE-AI/App/temp_classifier_data.c:78:11:ai_temp_classifier_data_weights_get	4	static
+../X-CUBE-AI/App/temp_classifier_data.c:91:9:ai_temp_classifier_data_params_get	32	static
