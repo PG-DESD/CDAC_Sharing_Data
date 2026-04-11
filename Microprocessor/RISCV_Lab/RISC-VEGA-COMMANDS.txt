@@ -1,0 +1,34 @@
+1) 
+Clone Git Repository: (For CDAC VEGA RISCV Boards - Firmware Package)
+git clone https://github.com/arif-desu/Lyra
+
+2)
+Install VsCode
+	- Install clangd extension
+	- GCC 
+	- extension to view markdown files
+	- extension to view pdf files
+
+After this go to the Lyra Repository Path in the terminal and Launch
+in VsCode:
+code .
+
+3) Install the firmware package by running the following command:
+sudo ./setup.sh
+
+4) To remove the package and install again/ or update:
+sudo ./removesdk.sh 
+sudo ./setup.sh 
+sudo updatesdk.sh
+
+5) To build the program and upload to the board:
+	make   		 => to generate the output file (.elf/.hex/.bin)
+	make flash   => to download the output file to the hardware
+	Press the button on Prompt and the code will be flashed.
+
+6) To check if the board is connected or not:
+	Open Terminal=> 
+	run the command sudo dmesg => 
+	Check the device as /dev/ttyUSB0
+	
+	Change permission using: sudo chmod 777 /dev/ttyUSB0

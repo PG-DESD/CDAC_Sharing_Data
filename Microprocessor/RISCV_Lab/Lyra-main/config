@@ -1,0 +1,21 @@
+#!/bin/env bash
+
+HEADER_PATH=/usr/local/include/vega
+SDK_PATH=/opt/Lyra
+RISCV_TOOLCHAIN_PATH=/opt/riscv-toolchain
+
+MINICOM_CONFIG=/etc/minirc.aries
+UDEV_CONFIG=/etc/udev/rules.d/10-aries.rules
+
+HOST_ARCH=$(uname -m)
+SETUP_PATH=$(realpath $PWD)
+DEFAULT_SHELL=$(grep "$SUDO_USER" /etc/passwd | awk -F: '{print $7}' | awk -F/ '{print $NF}')
+RC_FILE=/dev/null
+
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+NORMAL=$(tput sgr0)

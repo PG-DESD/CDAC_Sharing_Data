@@ -1,0 +1,61 @@
+Setting GPIO Direction
+
+*GPIOA_DIR &= ~(1 << Pin);   // Set as Input (0)
+*GPIOA_DIR |=  (1 << Pin);   // Set as Output (1)
+
+Each bit in GPIOA_DIR corresponds to one GPIO pin.
+Writing 0 → Input mode
+Writing 1 → Output mode	
+
+GPIO_Base = 0x1008 0000 //pg 13 CDAC THEJAS RM
+
+
+Offset Calculation:
+
+To access a specific GPIO pin’s data bit, you shift the bit position by 2:
+
+PADDR = ((1 << Pin) << 2)
+➜ Multiply by 4 because each GPIO register is 4 bytes apart (word-aligned).
+
+#define PADDR ((1 << 5) << 2)  // (1<<5)=0x20, <<2 => 0x80
+GPIOA_BASE = 0x10080000
+PADDR = 0x80
+GPIO_DATA = GPIOA_BASE + PADDR  // Offset for bit 5
+
+PADDR (Port Address) is not an actual hardware register:
+It is a calculated offset (mask) that helps the processor access one GPIO pin among many inside a port’s GPIO_DATA register region.
+
+Each GPIO port (say GPIOA) has:
+A base address (example: GPIOA_BASE = 0x10080000)
+A data register area where bits 0–15 correspond to GPIO pins 0–15.
+
+Why Shift by 2? (<< 2)
+
+Each GPIO pin is accessed through a 4-byte offset from the base address.
+
+Bit 0 → Offset = 0x000
+Bit 1 → Offset = 0x004
+Bit 2 → Offset = 0x008
+Bit 3 → Offset = 0x00C
+...
+Bit N → Offset = (1 << N) << 2
+
+That << 2 is equivalent to multiplying by 4, giving 4 bytes per pin.
+
+Example:
+GPIOA_BASE = 0x10080000
+Define PADDR (bit offset)
+	#define PADDR  ((1 << Pin) << 2)
+	(1 << 5) = 0x20
+	(1 << 5) << 2 = 0x80
+For pin 5:
+	So, PADDR = 0x80
+	That means, to access GPIOA pin 5, we need to go to GPIOA_BASE + 0x80
+Create final data address
+	GPIO_DATA = GPIOA_BASE + PADDR
+	GPIO_DATA = 0x10080000 + 0x80 = 0x10080080
+	This address (0x10080080) points to the data register for bit 5 only.
+Writing to GPIO pin 5
+	set pin 5 HIGH:		*GPIO_DATA |= (1 << 5);
+	This writes 1 to only pin 5, leaving all other pins unaffected.
+	set pin 5 LOW:		*GPIO_DATA &= ~(1 << 5);
