@@ -1,5 +1,5 @@
 <p align="center">
-<img src="images/lyrabanner.png" alt="lyra-banner">
+<img src="Lyra-main/images/lyrabanner.png" alt="lyra-banner">
 </p>
 
 Lyra is an SDK for CDAC's VEGA series of micro-controllers, encompassing its development, documentation, and resources for a seamless experience. 
